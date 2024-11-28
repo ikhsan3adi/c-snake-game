@@ -1,7 +1,9 @@
 # Tugas Besar Praktikum Dasar-Dasar Pemrograman
 
-- Kelompok 11 [- .. .-. .. --.. --..]
-- Topik: Permainan Sudoku
+- Kelompok - .. .-. .. --.. --..
+  - Ikhsan Satriadi
+  - Rizky Satria Gunawan
+- Topik: Permainan Snake
 
 ## Ketentuan
 

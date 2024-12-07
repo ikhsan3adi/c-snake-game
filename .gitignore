@@ -1,2 +1,5 @@
 **/*.exe
 **/*.o
+
+# for linux/macos
+snake

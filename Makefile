@@ -5,18 +5,18 @@ LDFLAGS_WINDOWS = -Llib -lpdcurses # Gunakan pdcurses di Windows
 LDFLAGS_LINUX_MAC = -lncurses # Gunakan ncurses di Linux/MacOS
 
 # Deteksi platform (Linux/MacOS/Windows)
-UNAME_S := $(shell uname -s)
+UNAME_S := $(shell uname -s) # Hanya bekerja untuk Linux/MacOS
 
 # Tentukan CFLAGS dan LDFLAGS sesuai dengan platform
-# Untuk Windows secara default
+# Windows (default)
 CFLAGS = $(CFLAGS_WINDOWS)
 LDFLAGS = $(LDFLAGS_WINDOWS)
 
-ifeq ($(UNAME_S), Linux)  # Untuk Linux
+ifeq ($(UNAME_S), Linux)  # Linux
     CFLAGS = $(CFLAGS_LINUX_MAC)
     LDFLAGS = $(LDFLAGS_LINUX_MAC)
 endif
-ifeq ($(UNAME_S), Darwin) # Untuk macOS
+ifeq ($(UNAME_S), Darwin) # macOS
     CFLAGS = $(CFLAGS_LINUX_MAC)
     LDFLAGS = $(LDFLAGS_LINUX_MAC)
 endif

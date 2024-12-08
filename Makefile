@@ -7,18 +7,18 @@ LDFLAGS_LINUX_MAC = -lncurses # Gunakan ncurses di Linux/MacOS
 # Deteksi platform (Linux/MacOS/Windows)
 UNAME_S := $(shell uname -s)
 
-# Tentukan LDFLAGS sesuai dengan platform
+# Tentukan CFLAGS dan LDFLAGS sesuai dengan platform
+# Untuk Windows secara default
+CFLAGS = $(CFLAGS_WINDOWS)
+LDFLAGS = $(LDFLAGS_WINDOWS)
+
 ifeq ($(UNAME_S), Linux)  # Untuk Linux
-		CFLAGS = $(CFLAGS_LINUX_MAC)
+    CFLAGS = $(CFLAGS_LINUX_MAC)
     LDFLAGS = $(LDFLAGS_LINUX_MAC)
 endif
 ifeq ($(UNAME_S), Darwin) # Untuk macOS
-		CFLAGS = $(CFLAGS_LINUX_MAC)
+    CFLAGS = $(CFLAGS_LINUX_MAC)
     LDFLAGS = $(LDFLAGS_LINUX_MAC)
-endif
-ifeq ($(findstring CYGWIN,$(UNAME_S)),CYGWIN) # Untuk Windows
-		CFLAGS = $(CFLAGS_WINDOWS)
-    LDFLAGS = $(LDFLAGS_WINDOWS)
 endif
 
 SRC = $(wildcard *.c)
@@ -34,4 +34,4 @@ $(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ) $(TARGET)
+	rm -f $(OBJ)

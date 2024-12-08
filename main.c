@@ -12,8 +12,8 @@
 #include "game.h"
 #include "ui.h"
 
-#define SCREEN_WIDTH 25
-#define SCREEN_HEIGHT 20
+#define SCREEN_WIDTH 50
+#define SCREEN_HEIGHT 30
 #define FRAME_DELAY 110000 // 110 ms
 
 int main(int argc, char *argv[])

@@ -5,7 +5,6 @@
 #include "food.h"
 #include "vector.h"
 #include <stdbool.h>
-#include <curses.h>
 
 typedef struct
 {

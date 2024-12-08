@@ -1,3 +1,9 @@
+// Nama Program : game.c
+// Deskripsi    : Implementasi logika utama permainan,
+//                bertujuan mengelola siklus dan aturan dasar permainan
+// Pembuat      : Ikhsan Satriadi / 241511080
+//                Rizky Satria Gunawan / 241511089
+
 #include "game.h"
 
 Game game_create(int screen_width, int screen_height)

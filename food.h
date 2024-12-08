@@ -1,3 +1,9 @@
+// Nama Program : food.h
+// Deskripsi    : Definisi struktur dan fungsi untuk manajemen makanan dalam permainan,
+//                bertujuan merancang mekanisme generasi dan interaksi makanan dengan ular
+// Pembuat      : Ikhsan Satriadi / 241511080
+//                Rizky Satria Gunawan / 241511089
+
 #ifndef FOOD_H
 #define FOOD_H
 

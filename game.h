@@ -1,3 +1,9 @@
+// Nama Program : game.h
+// Deskripsi    : Deklarasi struktur dan fungsi utama untuk logika permainan snake,
+//                bertujuan merancang kerangka utama permainan dan menentukan alur permainan
+// Pembuat      : Ikhsan Satriadi / 241511080
+//                Rizky Satria Gunawan / 241511089
+
 #ifndef GAME_H
 #define GAME_H
 

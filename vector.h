@@ -1,3 +1,9 @@
+// Nama Program : vector.h
+// Deskripsi    : Definisi struktur dan fungsi vektor untuk manajemen koordinat dalam permainan snake,
+//                bertujuan menyediakan abstraksi koordinat untuk mendukung pergerakan objek
+// Pembuat      : Ikhsan Satriadi / 241511080
+//                Rizky Satria Gunawan / 241511089
+
 #ifndef VECTOR_H
 #define VECTOR_H
 

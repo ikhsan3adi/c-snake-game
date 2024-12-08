@@ -1,3 +1,9 @@
+// Nama Program : food.c
+// Deskripsi    : Implementasi logika generasi dan interaksi makanan dengan ular,
+//                bertujuan menghasilkan makanan secara acak dan mengelola interaksi dengan ular
+// Pembuat      : Ikhsan Satriadi / 241511080
+//                Rizky Satria Gunawan / 241511089
+
 #include "food.h"
 
 Food create_food(int screen_width, int screen_height, Snake *snake)

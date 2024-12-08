@@ -1,3 +1,10 @@
+// Nama Program : main.c
+// Deskripsi    : Program Permainan Snake
+//                Mengimplementasikan permainan klasik snake
+//                dengan kontrol menggunakan keyboard dan tampilan console
+// Pembuat      : Ikhsan Satriadi / 241511080
+//                Rizky Satria Gunawan / 241511089
+
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>

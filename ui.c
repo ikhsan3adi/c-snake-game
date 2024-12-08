@@ -1,3 +1,9 @@
+// Nama Program : ui.c
+// Deskripsi    : Implementasi tampilan dan interaksi pengguna dalam permainan snake,
+//                bertujuan mengimplementasikan rendering grafis dan penanganan input pemain
+// Pembuat      : Ikhsan Satriadi / 241511080
+//                Rizky Satria Gunawan / 241511089
+
 #include "ui.h"
 #include <string.h>
 

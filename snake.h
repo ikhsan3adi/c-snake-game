@@ -1,3 +1,9 @@
+// Nama Program : snake.h
+// Deskripsi    : Deklarasi struktur dan fungsi untuk manajemen ular dalam permainan,
+//                bertujuan mendefinisikan struktur data dan antarmuka untuk mengontrol perilaku ular
+// Pembuat      : Ikhsan Satriadi / 241511080
+//                Rizky Satria Gunawan / 241511089
+
 #ifndef SNAKE_H
 #define SNAKE_H
 

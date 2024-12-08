@@ -1,3 +1,10 @@
+// Nama Program : vector.c
+// Deskripsi    : Implementasi fungsi-fungsi manipulasi vector untuk mendukung representasi
+//                dan perhitungan koordinat dalam permainan.
+//                Bertujuan mengimplementasikan operasi dasar vector dalam permainan.
+// Pembuat      : Ikhsan Satriadi / 241511080
+//                Rizky Satria Gunawan / 241511089
+
 #include "vector.h"
 
 Vector2 vector2_create(int x, int y)

@@ -165,8 +165,6 @@ void ui_handle_input(Game *game)
     if (!game->is_running)
       quit_game();
   }
-
-  return 0;
 }
 
 // Prosedur untuk keluar dari permainan

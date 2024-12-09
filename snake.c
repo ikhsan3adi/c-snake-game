@@ -7,6 +7,10 @@
 
 #include "snake.h"
 
+// Fungsi untuk membuat ular baru
+// start_x: posisi awal x dari kepala ular
+// start_y: posisi awal y dari kepala ular
+// Mengembalikan objek ular baru bertipe Snake
 Snake create_snake(int start_x, int start_y)
 {
   Snake new_snake = {0};
@@ -19,6 +23,8 @@ Snake create_snake(int start_x, int start_y)
   return new_snake;
 }
 
+// Prosedur untuk menggerakkan ular
+// snake: parameter input/output passing by reference, menunjuk ke objek ular yang akan diperbarui
 void snake_move(Snake *snake)
 {
   // Geser segmen
@@ -32,6 +38,9 @@ void snake_move(Snake *snake)
   snake->head = vector2_add(snake->head, snake->direction);
 }
 
+// Fungsi untuk memeriksa apakah ular bertabrakan dengan dirinya sendiri
+// snake: parameter input passing by reference, menunjuk ke objek ular yang akan diperiksa
+// Mengembalikan true jika ular bertabrakan dengan dirinya sendiri, false jika tidak
 bool snake_collides_with_self(Snake *snake)
 {
   for (int i = 1; i < snake->length; i++)
@@ -44,6 +53,9 @@ bool snake_collides_with_self(Snake *snake)
   return false;
 }
 
+// Fungsi untuk menumbuhkan ular
+// snake: parameter input/output passing by reference, menunjuk ke objek ular yang akan diperbarui
+// Mengembalikan true jika ular berhasil tumbuh, false jika tidak (misalnya, jika sudah mencapai panjang maksimum)
 bool snake_grow(Snake *snake)
 {
   if (snake->length < MAX_SNAKE_LENGTH)
@@ -54,6 +66,9 @@ bool snake_grow(Snake *snake)
   return false;
 }
 
+// Fungsi untuk mendapatkan simbol yang merepresentasikan kepala ular berdasarkan arah gerakan
+// snake: parameter input passing, menunjuk ke objek ular yang akan diperiksa
+// Mengembalikan karakter yang merepresentasikan kepala ular ('>', '<', 'v', '^')
 char get_snake_head_symbol(Snake *snake)
 {
   Vector2 dir = snake->direction;
@@ -70,6 +85,9 @@ char get_snake_head_symbol(Snake *snake)
   return '>'; // default
 }
 
+// Prosedur untuk mengubah arah gerakan ular
+// snake: parameter input/output passing by reference, menunjuk ke objek ular yang akan diperbarui
+// new_direction: arah baru untuk ular, bertipe Vector2
 void snake_change_direction(Snake *snake, Vector2 new_direction)
 {
   // Cegah ular bergerak mundur

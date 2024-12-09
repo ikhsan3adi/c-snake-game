@@ -6,6 +6,10 @@
 
 #include "game.h"
 
+// Fungsi untuk membuat objek permainan baru
+// screen_width: parameter input passing by value, tipe int, lebar layar
+// screen_height: parameter input passing by value, tipe int, tinggi layar
+// Mengembalikan objek permainan baru bertipe Game
 Game game_create(int screen_width, int screen_height)
 {
   Game new_game = {0};
@@ -27,6 +31,8 @@ Game game_create(int screen_width, int screen_height)
   return new_game;
 }
 
+// Prosedur untuk memperbarui logika permainan
+// game: parameter input/output passing by reference, tipe Game*, menunjuk ke objek permainan yang akan diperbarui
 void game_update(Game *game)
 {
   // Gerakkan ular
@@ -56,6 +62,9 @@ void game_update(Game *game)
   }
 }
 
+// Fungsi untuk memeriksa apakah permainan telah berakhir
+// game: parameter input passing by reference, tipe Game*, menunjuk ke objek permainan yang akan diperiksa
+// Mengembalikan true jika permainan berakhir, false jika tidak
 bool is_game_over(Game *game)
 {
   Snake *snake = &game->game_snake;
@@ -73,6 +82,8 @@ bool is_game_over(Game *game)
       game->screen_height);
 }
 
+// Prosedur untuk merestart permainan
+// game: parameter input/output passing by reference, tipe Game*, menunjuk ke objek permainan yang akan direset
 void game_restart(Game *game)
 {
   // Kembalikan ular ke posisi awal
@@ -91,6 +102,9 @@ void game_restart(Game *game)
   game->is_running = true;
 }
 
+// Prosedur untuk menangani input dari pengguna
+// game: parameter input/output passing by reference, tipe Game*, menunjuk ke objek permainan yang akan diperbarui berdasarkan input
+// new_dir: parameter input passing by value, tipe Vector2, arah baru untuk ular
 void game_handle_input(Game *game, Vector2 new_dir)
 {
   snake_change_direction(&game->game_snake, new_dir);

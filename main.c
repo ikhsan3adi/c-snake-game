@@ -35,10 +35,7 @@ int main(int argc, char *argv[])
   while (game.is_running)
   {
     // Tangani input
-    if (ui_handle_input(&game) == -1)
-    {
-      quit_game();
-    }
+    ui_handle_input(&game);
 
     // Perbarui logika permainan
     game_update(&game);

@@ -10,6 +10,8 @@
 
 char scoreText[20];
 
+// Prosedur untuk menginisialisasi antarmuka pengguna (UI)
+// Mengatur mode tampilan, warna, dan pengaturan awal untuk tampilan permainan.
 void initialize_ui()
 {
   // Inisialisasi curses
@@ -33,6 +35,9 @@ void initialize_ui()
   init_pair(3, COLOR_YELLOW, COLOR_BLACK); // Border
 }
 
+// Prosedur untuk merender tampilan permainan
+// game: parameter input, menunjuk ke objek Game yang akan dirender
+// Menggambar elemen-elemen permainan seperti ular, makanan, skor, dan batas layar.
 void render_ui(Game *game)
 {
   erase();
@@ -70,6 +75,12 @@ void render_ui(Game *game)
   mvaddstr(0, game->screen_width - strlen(scoreText), scoreText);
 }
 
+// Prosedur untuk menggambar batas layar
+// y: posisi y dari batas
+// x: posisi x dari batas
+// width: lebar batas
+// height: tinggi batas
+// Menggambar batas permainan di layar.
 void draw_border(int y, int x, int width, int height)
 {
   // Top border
@@ -96,6 +107,9 @@ void draw_border(int y, int x, int width, int height)
   }
 }
 
+// Prosedur untuk menampilkan tampilan game over
+// game: parameter input, menunjuk ke objek Game yang akan ditampilkan
+// Menampilkan pesan game over atau kemenangan, serta instruksi untuk memulai ulang permainan.
 void show_game_over_ui(Game *game)
 {
   // Tampilkan pesan game over
@@ -123,7 +137,9 @@ void show_game_over_ui(Game *game)
   }
 }
 
-int ui_handle_input(Game *game)
+// Prosedur untuk menangani input dari pengguna
+// game: parameter input/output passing by reference, menunjuk ke objek Game yang akan diperbarui berdasarkan input
+void ui_handle_input(Game *game)
 {
   int ch = wgetch(stdscr); // Mendapatkan input
 
@@ -153,6 +169,8 @@ int ui_handle_input(Game *game)
   return 0;
 }
 
+// Prosedur untuk keluar dari permainan
+// Menghentikan antarmuka pengguna dan membersihkan layar sebelum keluar dari program.
 void quit_game()
 {
   endwin();

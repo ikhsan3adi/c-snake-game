@@ -7,34 +7,49 @@
 #ifndef SNAKE_H
 #define SNAKE_H
 
-#define MAX_SNAKE_LENGTH 256
-
+#include <stdbool.h>
 #include "vector.h"
 
+// Definisi maksimum panjang ular
+#define MAX_SNAKE_LENGTH 256
+
+// Struktur untuk merepresentasikan objek ular dalam permainan
 typedef struct
 {
-  Vector2 head;
-  Vector2 segments[MAX_SNAKE_LENGTH];
-  Vector2 direction;
-  int length;
+  Vector2 head;                       // Posisi kepala ular
+  Vector2 segments[MAX_SNAKE_LENGTH]; // Array untuk menyimpan posisi segmen-segmen tubuh ular
+  int length;                         // Panjang ular (jumlah segmen)
+  Vector2 direction;                  // Arah gerakan ular
 } Snake;
 
-// Membuat ular
+// Fungsi untuk membuat ular baru
+// start_x: posisi awal x dari kepala ular
+// start_y: posisi awal y dari kepala ular
+// Mengembalikan objek ular baru bertipe Snake
 Snake create_snake(int start_x, int start_y);
 
-// Menggerakkan ular
+// Prosedur untuk menggerakkan ular
+// snake: parameter input/output passing by reference, menunjuk ke objek ular yang akan diperbarui
 void snake_move(Snake *snake);
 
-// Memeriksa tabrakan dengan diri sendiri
+// Fungsi untuk memeriksa apakah ular bertabrakan dengan dirinya sendiri
+// snake: parameter input passing by reference, menunjuk ke objek ular yang akan diperiksa
+// Mengembalikan true jika ular bertabrakan dengan dirinya sendiri, false jika tidak
 bool snake_collides_with_self(Snake *snake);
 
-// Menumbuhkan ular
+// Fungsi untuk menumbuhkan ular
+// snake: parameter input/output passing by reference, menunjuk ke objek ular yang akan diperbarui
+// Mengembalikan true jika ular berhasil tumbuh, false jika tidak (misalnya, jika sudah mencapai panjang maksimum)
 bool snake_grow(Snake *snake);
 
-// Mendapatkan simbol kepala ular berdasarkan arah
+// Fungsi untuk mendapatkan simbol yang merepresentasikan kepala ular berdasarkan arah gerakan
+// snake: parameter input passing, menunjuk ke objek ular yang akan diperiksa
+// Mengembalikan karakter yang merepresentasikan kepala ular ('>', '<', 'v', '^')
 char get_snake_head_symbol(Snake *snake);
 
-// Mengubah arah ular
+// Prosedur untuk mengubah arah gerakan ular
+// snake: parameter input/output passing by reference, menunjuk ke objek ular yang akan diperbarui
+// new_direction: arah baru untuk ular, bertipe Vector2
 void snake_change_direction(Snake *snake, Vector2 new_direction);
 
-#endif
+#endif // SNAKE_H

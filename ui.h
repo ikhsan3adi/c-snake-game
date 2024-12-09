@@ -9,22 +9,34 @@
 
 #include "game.h"
 
-// Inisialisasi antarmuka
+// Prosedur untuk menginisialisasi antarmuka pengguna (UI)
+// Mengatur mode tampilan, warna, dan pengaturan awal untuk tampilan permainan.
 void initialize_ui();
 
-// Render game
+// Prosedur untuk merender tampilan permainan
+// game: parameter input, menunjuk ke objek Game yang akan dirender
+// Menggambar elemen-elemen permainan seperti ular, makanan, skor, dan batas layar.
 void render_ui(Game *game);
 
-// Gambar border
+// Prosedur untuk menggambar batas layar
+// y: posisi y dari batas
+// x: posisi x dari batas
+// width: lebar batas
+// height: tinggi batas
+// Menggambar batas permainan di layar.
 void draw_border(int y, int x, int width, int height);
 
-// Tampilkan layar game over
+// Prosedur untuk menampilkan tampilan game over
+// game: parameter input, menunjuk ke objek Game yang akan ditampilkan
+// Menampilkan pesan game over atau kemenangan, serta instruksi untuk memulai ulang permainan.
 void show_game_over_ui(Game *game);
 
-// Tangani input
-int ui_handle_input(Game *game);
+// Prosedur untuk menangani input dari pengguna
+// game: parameter input/output passing by reference, menunjuk ke objek Game yang akan diperbarui berdasarkan input
+void ui_handle_input(Game *game);
 
-// Keluar dari permainan
+// Prosedur untuk keluar dari permainan
+// Menghentikan antarmuka pengguna dan membersihkan layar sebelum keluar dari program.
 void quit_game();
 
-#endif
+#endif // UI_H

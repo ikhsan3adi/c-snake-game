@@ -7,7 +7,6 @@
 #ifndef UI_H
 #define UI_H
 
-#include <curses.h>
 #include "game.h"
 
 // Inisialisasi antarmuka

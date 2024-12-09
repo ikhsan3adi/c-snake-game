@@ -4,8 +4,9 @@
 // Pembuat      : Ikhsan Satriadi / 241511080
 //                Rizky Satria Gunawan / 241511089
 
-#include "ui.h"
 #include <string.h>
+#include <curses.h>
+#include "ui.h"
 
 char scoreText[20];
 

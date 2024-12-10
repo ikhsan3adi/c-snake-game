@@ -64,6 +64,10 @@ void show_menu(GameData *game_data)
 
     show_title();
 
+    // tampilkan hi-score saat ini
+    sprintf(buffer, "Hi-Score: %d | %s", game_data->hi_score.score, game_data->hi_score.player_name);
+    mvprintw(9, 54, buffer);
+
     attron(COLOR_PAIR(3)); // beri warna kuning
     mvprintw(9, 10, "=== Menu ===");
     mvprintw(11, 10, "1. Main");

@@ -9,8 +9,9 @@
 // Fungsi untuk membuat objek permainan baru
 // screen_width: parameter input passing by value, tipe int, lebar layar
 // screen_height: parameter input passing by value, tipe int, tinggi layar
+// game_data: parameter input passing by reference, tipe GameData, data permainan
 // Mengembalikan objek permainan baru bertipe Game
-Game game_create(int screen_width, int screen_height)
+Game game_create(int screen_width, int screen_height, GameData *game_data)
 {
   Game new_game = {0};
 
@@ -25,10 +26,26 @@ Game game_create(int screen_width, int screen_height)
   new_game.game_food = create_food(screen_width, screen_height, &new_game.game_snake);
 
   // Atur status awal
-  new_game.score = 0;
+  new_game.current_score.score = 0;
+  new_game.hi_score = game_data->hi_score;
+  new_game.settings = game_data->settings;
   new_game.is_running = true;
+  new_game.is_pause = false;
 
   return new_game;
+}
+
+// Prosedur untuk mengubah hi_score di game dan game_data
+// game: parameter output passing by reference, tipe Game*, menunjuk ke objek permainan yang akan diperbarui
+// game_data: parameter output passing by reference, tipe GameData*, menunjuk ke objek data permainan yang akan diperbarui
+// current_score: parameter input passing by value, tipe Score
+void set_game_hi_score(Game *game, GameData *game_data, Score current_score)
+{ // Cek apakah skor saat ini melebihi hi-score
+  if (current_score.score > game_data->hi_score.score)
+  {
+    game_data->hi_score = current_score; // perbarui hi-score di game data
+    game->hi_score = current_score;      // perbarui hi-score di game
+  }
 }
 
 // Prosedur untuk memperbarui logika permainan
@@ -51,7 +68,7 @@ void game_update(Game *game)
     // Tumbuhkan ular
     if (snake_grow(&game->game_snake))
     {
-      game->score++;
+      add_score(&game->current_score);
     }
 
     // Buat makanan baru
@@ -84,22 +101,10 @@ bool is_game_over(Game *game)
 
 // Prosedur untuk merestart permainan
 // game: parameter input/output passing by reference, tipe Game*, menunjuk ke objek permainan yang akan direset
-void game_restart(Game *game)
+// game_data: parameter output passing by reference, tipe GameData*, menunjuk ke objek data permainan
+void game_restart(Game *game, GameData *game_data)
 {
-  // Kembalikan ular ke posisi awal
-  game->game_snake = create_snake(
-      game->screen_width / 2,
-      game->screen_height / 2);
-
-  // Buat makanan baru
-  game->game_food = create_food(
-      game->screen_width,
-      game->screen_height,
-      &game->game_snake);
-
-  // Reset skor dan status
-  game->score = 0;
-  game->is_running = true;
+  *game = game_create(game->screen_width, game->screen_height, game_data);
 }
 
 // Prosedur untuk menangani input dari pengguna

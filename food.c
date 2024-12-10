@@ -39,9 +39,10 @@ Vector2 food_generate_position(int screen_width, int screen_height, Snake *snake
         1 + rand() % (screen_width - 2),
         1 + rand() % (screen_height - 2));
 
-    // Periksa apakah posisi bertabrakan dengan kepala ular atau segmen ular
+    // Periksa apakah posisi bertabrakan dengan kepala ular
     valid_position = !vector2_equals(new_position, snake->head);
 
+    // Periksa apakah posisi bertabrakan dengan segmen ular
     for (int i = 0; i < snake->length && valid_position; i++)
     {
       if (vector2_equals(new_position, snake->segments[i]))

@@ -19,19 +19,19 @@ void initialize_ui()
   srand(time(NULL));
 
   // Inisialisasi curses
-  initscr();
-  cbreak();
-  noecho();
-  keypad(stdscr, TRUE);
-  curs_set(0);
-  nodelay(stdscr, TRUE);
+  initscr();             // Inisialisasi & mengaktifkan tampilan curses
+  cbreak();              // Mengaktifkan mode cbreak, yang memungkinkan input karakter tanpa menunggu enter
+  noecho();              // Menonaktifkan echo input, sehingga karakter yang dimasukkan tidak ditampilkan
+  keypad(stdscr, TRUE);  // Mengaktifkan pengenalan tombol khusus (cth. arrow key)
+  curs_set(0);           // Menyembunyikan kursor
+  nodelay(stdscr, TRUE); // Mengatur input non-blocking, sehingga getch() tidak menunggu input
 
   // Inisialisasi warna
   if (has_colors() == FALSE)
   {
-    endwin();
-    fprintf(stderr, "Terminal tidak mendukung warna\n");
-    exit(1);
+    endwin();                                            // Mengakhiri mode curses jika terminal tidak mendukung warna
+    fprintf(stderr, "Terminal tidak mendukung warna\n"); // Menampilkan pesan kesalahan
+    exit(1);                                             // Keluar dari program dengan status kesalahan
   }
   // Inisialisasi warna
   start_color();
@@ -57,7 +57,7 @@ void show_title()
 // game_data: parameter input/output passing by reference, menunjuk ke objek GameData yang menyimpan data permainan
 void show_menu(GameData *game_data)
 {
-  int choice;
+  int choice; // Variabel untuk menyimpan pilihan pengguna
   do
   {
     erase(); // Bersihkan layar
@@ -71,11 +71,10 @@ void show_menu(GameData *game_data)
     attron(COLOR_PAIR(3)); // beri warna kuning
     mvprintw(9, 10, "=== Menu ===");
     mvprintw(11, 10, "1. Main");
-    sprintf(buffer, "2. Atur Level (Level: %d)", game_data->settings.level);
+    sprintf(buffer, "2. Atur Level (Level: %d)", game_data->settings.level); // menampilkan level saat ini
     mvprintw(12, 10, buffer);
     mvprintw(13, 10, "3. Keluar");
     mvprintw(15, 10, "Pilih opsi (1-3): ");
-    refresh();
 
     choice = getch(); // Ambil input dari pengguna
 
@@ -99,7 +98,7 @@ void show_menu(GameData *game_data)
 // game_data: parameter input/output passing by reference, menunjuk ke objek GameData yang menyimpan data permainan
 void set_game_level(GameData *game_data)
 {
-  int level_choice;
+  int level_choice; // Variabel untuk menyimpan pilihan pengguna
   do
   {
     erase(); // Bersihkan layar
@@ -187,15 +186,15 @@ void render_ui(Game *game)
 
   // Tampilkan skor
   sprintf(buffer, " Score: %d ", game->current_score.score);
-  mvaddstr(0, game->screen_width - (strlen(buffer) / 2), buffer);
+  mvaddstr(0, game->screen_width - (strlen(buffer) / 2), buffer); // tampilkan skor di tengah atas
 
   // Tampilkan hi-score
   sprintf(buffer, " Hi-Score: %d | %s ", game->hi_score.score, game->hi_score.player_name);
-  mvaddstr(game->screen_height + 1, 2, buffer);
+  mvaddstr(game->screen_height + 1, 2, buffer); // tampilkan hi-score di kiri bawah
 
   // Tampilkan level saat ini
   sprintf(buffer, " Level: %d ", game->settings.level);
-  mvaddstr(game->screen_height + 1, game->screen_width * 2 - 10, buffer);
+  mvaddstr(game->screen_height + 1, game->screen_width * 2 - 10, buffer); // tampilkan level di kanan bawah
 }
 
 // Prosedur untuk menggambar batas layar
@@ -238,7 +237,7 @@ void draw_border(int y, int x, int width, int height)
   }
 }
 
-// Prosedur untuk menampilkan tampilan game over
+// Prosedur untuk menampilkan tampilan game over atau paused
 // game: parameter input, menunjuk ke objek Game yang akan ditampilkan
 // Menampilkan pesan game over atau kemenangan, serta instruksi untuk memulai ulang permainan.
 void show_game_over_ui(Game *game)
@@ -248,7 +247,7 @@ void show_game_over_ui(Game *game)
 
   if (game->game_snake.length >= MAX_SNAKE_LENGTH)
   {
-    // Pesan kemenangan
+    // Pesan kemenangan di tengah layar
     mvaddstr(game->screen_height / 2,
              game->screen_width - 10,
              "  Selamat! Anda Menang!  ");
@@ -264,7 +263,6 @@ void show_game_over_ui(Game *game)
   }
   else
   {
-    // Pesan game over
     if (game->is_pause) // tampilkan pesan berbeda jika pause
     {
       mvaddstr(game->screen_height / 2,
@@ -274,7 +272,7 @@ void show_game_over_ui(Game *game)
                game->screen_width - 16,
                "Tekan SPACE untuk melanjutkan (resume)");
     }
-    else
+    else // Pesan game over
     {
       mvaddstr(game->screen_height / 2,
                game->screen_width - 10,
@@ -284,6 +282,7 @@ void show_game_over_ui(Game *game)
                "Tekan SPACE untuk restart");
     }
 
+    // tampilkan instruksi untuk pergi ke menu atau keluar
     mvaddstr(game->screen_height / 2 + 2,
              game->screen_width - 14,
              "Tekan ENTER untuk kembali ke menu");
@@ -319,7 +318,7 @@ void get_player_name(Game *game)
   erase(); // bersihkan layar
 }
 
-// Prosedur untuk menangani input dari pengguna
+// Prosedur untuk menangani input dari pengguna selama dalam permainan
 // game: parameter input/output passing by reference, menunjuk ke objek Game yang akan diperbarui berdasarkan input
 // game_data: parameter input/output passing by reference, menunjuk ke objek GameData yang menyimpan data permainan
 void ui_handle_input(Game *game, GameData *game_data)
@@ -365,10 +364,10 @@ void ui_handle_input(Game *game, GameData *game_data)
 // Menghentikan antarmuka pengguna dan membersihkan layar sebelum keluar dari program.
 void quit_game()
 {
-  endwin();
+  endwin(); // Mengakhiri mode curses, mengembalikan terminal ke mode normal
 
-  printf("\e[1;1H\e[2J");
-  printf("\e[?25h");
+  printf("\e[1;1H\e[2J"); // Mengatur kursor ke posisi (1,1) dan membersihkan layar terminal
+  printf("\e[?25h");      // Menampilkan kursor kembali setelah keluar dari mode curses
 
-  exit(0);
+  exit(0); // Keluar dari program dengan status sukses
 }

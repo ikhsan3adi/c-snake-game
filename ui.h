@@ -37,7 +37,7 @@ void render_ui(Game *game);
 // Menggambar batas permainan di layar.
 void draw_border(int y, int x, int width, int height);
 
-// Prosedur untuk menampilkan tampilan game over
+// Prosedur untuk menampilkan tampilan game over atau paused
 // game: parameter input, menunjuk ke objek Game yang akan ditampilkan
 // Menampilkan pesan game over atau kemenangan, serta instruksi untuk memulai ulang permainan.
 void show_game_over_ui(Game *game);
@@ -46,7 +46,7 @@ void show_game_over_ui(Game *game);
 // game: parameter input/output passing by reference, menunjuk ke objek Game yang akan diperbarui berdasarkan input
 void get_player_name(Game *game);
 
-// Prosedur untuk menangani input dari pengguna
+// Prosedur untuk menangani input dari pengguna selama dalam permainan
 // game: parameter input/output passing by reference, menunjuk ke objek Game yang akan diperbarui berdasarkan input
 // game_data: parameter input/output passing by reference, menunjuk ke objek GameData yang menyimpan data permainan
 void ui_handle_input(Game *game, GameData *game_data);

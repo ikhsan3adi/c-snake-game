@@ -29,8 +29,9 @@ Food create_food(int screen_width, int screen_height, Snake *snake)
 // Mengembalikan posisi makanan yang valid bertipe Vector2
 Vector2 food_generate_position(int screen_width, int screen_height, Snake *snake)
 {
+  // Deklarasi variabel untuk menyimpan posisi makanan
   Vector2 new_position;
-  bool valid_position;
+  bool valid_position; // variabel untuk menyimpan status validitas posisi
 
   do
   {

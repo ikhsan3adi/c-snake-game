@@ -44,7 +44,7 @@ void set_game_hi_score(Game *game, GameData *game_data, Score current_score);
 // game: parameter input/output passing by reference, tipe Game*, menunjuk ke objek permainan yang akan diperbarui
 void game_update(Game *game);
 
-// Fungsi untuk memeriksa apakah permainan telah berakhir
+// Fungsi untuk memeriksa apakah permainan telah berakhir (ular menabrak tembok atau ular itu sendiri)
 // game: parameter input passing by reference, tipe Game*, menunjuk ke objek permainan yang akan diperiksa
 // Mengembalikan true jika permainan berakhir, false jika tidak
 bool is_game_over(Game *game);
@@ -54,7 +54,7 @@ bool is_game_over(Game *game);
 // game_data: parameter output passing by reference, tipe GameData*, menunjuk ke objek data permainan
 void game_restart(Game *game, GameData *game_data);
 
-// Prosedur untuk menangani input dari pengguna
+// Prosedur untuk menangani input dari pengguna untuk mengubah arah pergerakan ular
 // game: parameter input/output passing by reference, tipe Game*, menunjuk ke objek permainan yang akan diperbarui berdasarkan input
 // new_dir: parameter input passing by value, tipe Vector2, arah baru untuk ular
 void game_handle_input(Game *game, Vector2 new_dir);

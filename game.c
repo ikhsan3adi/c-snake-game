@@ -27,8 +27,8 @@ Game game_create(int screen_width, int screen_height, GameData *game_data)
 
   // Atur status awal
   new_game.current_score.score = 0;
-  new_game.hi_score = game_data->hi_score;
-  new_game.settings = game_data->settings;
+  new_game.hi_score = game_data->hi_score; // ambil dari game data
+  new_game.settings = game_data->settings; // ambil dari game data
   new_game.is_running = true;
   new_game.is_pause = false;
 
@@ -65,7 +65,7 @@ void game_update(Game *game)
   // Cek tabrakan dengan makanan
   if (vector2_equals(game->game_food.position, game->game_snake.head))
   {
-    // Tumbuhkan ular
+    // Tambah skor dan panjang ular
     if (snake_grow(&game->game_snake))
     {
       add_score(&game->current_score);
@@ -79,7 +79,7 @@ void game_update(Game *game)
   }
 }
 
-// Fungsi untuk memeriksa apakah permainan telah berakhir
+// Fungsi untuk memeriksa apakah permainan telah berakhir (ular menabrak tembok atau ular itu sendiri)
 // game: parameter input passing by reference, tipe Game*, menunjuk ke objek permainan yang akan diperiksa
 // Mengembalikan true jika permainan berakhir, false jika tidak
 bool is_game_over(Game *game)
@@ -107,7 +107,7 @@ void game_restart(Game *game, GameData *game_data)
   *game = game_create(game->screen_width, game->screen_height, game_data);
 }
 
-// Prosedur untuk menangani input dari pengguna
+// Prosedur untuk menangani input dari pengguna untuk mengubah arah pergerakan ular
 // game: parameter input/output passing by reference, tipe Game*, menunjuk ke objek permainan yang akan diperbarui berdasarkan input
 // new_dir: parameter input passing by value, tipe Vector2, arah baru untuk ular
 void game_handle_input(Game *game, Vector2 new_dir)

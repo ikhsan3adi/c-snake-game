@@ -1,3 +1,10 @@
+// Nama Program : settings.h
+// Deskripsi    : Header file untuk pengaturan permainan,
+//                mendefinisikan struktur Settings dan fungsi-fungsi terkait untuk
+//                memperbarui dan mengelola pengaturan permainan seperti level dan kecepatan.
+// Pembuat      : Ikhsan Satriadi / 241511080
+//                Rizky Satria Gunawan / 241511089
+
 #ifndef SETTINGS_H
 #define SETTINGS_H
 

@@ -105,26 +105,27 @@ void set_game_level(GameData *game_data)
 
     show_title();
 
-    attron(COLOR_PAIR(3));
+    attron(COLOR_PAIR(3)); // beri warna kuning
     mvprintw(9, 10, "=== Atur Level ===");
-    attroff(COLOR_PAIR(3));
-    attron(COLOR_PAIR(2));
+    attroff(COLOR_PAIR(3)); // hapus warna kuning
+    attron(COLOR_PAIR(2));  // beri warna hijau
     mvprintw(11, 10, "1. Level 1");
     mvprintw(12, 10, "2. Level 2 (Default)");
-    attroff(COLOR_PAIR(2));
-    attron(COLOR_PAIR(3));
+    attroff(COLOR_PAIR(2)); // hapus warna hijau
+    attron(COLOR_PAIR(3));  // beri warna kuning
     mvprintw(13, 10, "3. Level 3");
     mvprintw(14, 10, "4. Level 4");
-    attroff(COLOR_PAIR(3));
-    attron(COLOR_PAIR(1));
+    attroff(COLOR_PAIR(3)); // hapus warna kuning
+    attron(COLOR_PAIR(1));  // beri warna merah
     mvprintw(15, 10, "5. Level 5");
-    attroff(COLOR_PAIR(1));
+    attroff(COLOR_PAIR(1)); // hapus warna merah
     mvprintw(16, 10, "6. Kembali");
     mvprintw(18, 10, "Pilih opsi (1-6): ");
     refresh();
 
     level_choice = getch(); // Ambil input dari pengguna
 
+    // update level dan speed game berdasarkan pilihan pengguna
     switch (level_choice)
     {
     case '1':
@@ -142,7 +143,7 @@ void set_game_level(GameData *game_data)
     case '5':
       update_settings(&game_data->settings, 5, SPEED_5); // Level 5
       return;
-    case '6':
+    case '6': // kembali
       return;
     }
   } while (1);

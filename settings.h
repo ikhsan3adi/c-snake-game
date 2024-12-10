@@ -8,7 +8,7 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-// frame delay berdasarkan level
+// frame delay berdasarkan level (dalam microsecond)
 #define SPEED_1 200000
 #define SPEED_2 170000
 #define SPEED_3 140000

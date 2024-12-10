@@ -41,10 +41,6 @@ GameData load_game_data(const char *filename)
 // filename: parameter input passing by value, tipe const char*, nama file untuk dihapus
 void delete_game_data(const char *filename)
 {
-  FILE *file = fopen(filename, "wb"); // Membuka file dalam mode write binary
-  if (file != NULL)
-  {
-    fwrite("", 0, 1, file); // Hapus isi file dengan memasukkan NULL
-  }
-  fclose(file);
+  // Menghapus file dengan nama yang diberikan
+  remove(filename);
 }

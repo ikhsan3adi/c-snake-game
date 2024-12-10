@@ -1,5 +1,6 @@
 **/*.exe
 **/*.o
+**/*.dat
 
 # for linux/macos
 snake

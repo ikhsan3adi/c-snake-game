@@ -367,8 +367,5 @@ void quit_game()
 {
   endwin(); // Mengakhiri mode curses, mengembalikan terminal ke mode normal
 
-  printf("\e[1;1H\e[2J"); // Mengatur kursor ke posisi (1,1) dan membersihkan layar terminal
-  printf("\e[?25h");      // Menampilkan kursor kembali setelah keluar dari mode curses
-
   exit(0); // Keluar dari program dengan status sukses
 }

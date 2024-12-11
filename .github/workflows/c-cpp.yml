@@ -11,16 +11,23 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-        
+    env:
+      target: "snake-${{ matrix.os == 'ubuntu-latest' && 'linux' || 'windows' }}"
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v4
+    - name: Install dependencies
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        sudo apt-get install libncurses5-dev libncursesw5-dev
     - name: make
-      run: make
+      run: |
+        mkdir build
+        make TARGET=build/${{env.target}}
     - name: Download a Build Artifact
       uses: actions/upload-artifact@v4
       with:
         # Name of the artifact to download. If unspecified, all artifacts for the run are downloaded.
-        name: build
+        name: build-${{matrix.os}}
         # Destination path. Supports basic tilde expansion. Defaults to $GITHUB_WORKSPACE
         path: build

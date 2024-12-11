@@ -4,7 +4,6 @@
 // Pembuat      : Ikhsan Satriadi / 241511080
 //                Rizky Satria Gunawan / 241511089
 
-#include <stdio.h>
 #include "settings.h"
 
 // Prosedur untuk memperbarui pengaturan permainan (kecepatan permainan)

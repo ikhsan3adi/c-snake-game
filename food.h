@@ -9,7 +9,6 @@
 
 #include "vector.h"
 #include "snake.h"
-#include <stdlib.h>
 
 // Struktur untuk merepresentasikan objek makanan dalam permainan
 typedef struct

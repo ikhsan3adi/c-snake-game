@@ -4,6 +4,7 @@
 // Pembuat      : Ikhsan Satriadi / 241511080
 //                Rizky Satria Gunawan / 241511089
 
+#include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include <curses.h>

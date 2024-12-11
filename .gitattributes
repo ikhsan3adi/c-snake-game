@@ -1,1 +1,4 @@
+**/*.h linguist-vendored=false
+**/*.h linguist-generated=false
+**/*.h linguist-documentation=false
 **/*.h linguist-language=c

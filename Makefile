@@ -23,7 +23,7 @@ endif
 
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
-TARGET = snake
+TARGET = build/snake
 
 all: $(TARGET)
 

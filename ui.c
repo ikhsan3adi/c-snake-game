@@ -36,9 +36,10 @@ void initialize_ui()
   }
   // Inisialisasi warna
   start_color();
-  init_pair(1, COLOR_RED, COLOR_BLACK);    // Makanan warna merah
-  init_pair(2, COLOR_GREEN, COLOR_BLACK);  // Ular warna hijau
-  init_pair(3, COLOR_YELLOW, COLOR_BLACK); // Border warna kuning
+  init_pair(1, COLOR_RED, COLOR_BLACK);    // warna merah 1
+  init_pair(2, COLOR_GREEN, COLOR_BLACK);  // warna hijau 2
+  init_pair(3, COLOR_YELLOW, COLOR_BLACK); // warna kuning 3
+  init_pair(4, COLOR_CYAN, COLOR_BLACK);   // warna biru muda 4
 }
 
 // Prosedur untuk menampilkan judul game dengan ascii art
@@ -76,6 +77,16 @@ void show_menu(GameData *game_data)
     mvprintw(12, 10, buffer);
     mvprintw(13, 10, "3. Keluar");
     mvprintw(15, 10, "Pilih opsi (1-3): ");
+    attroff(COLOR_PAIR(3)); // hapus warna kuning
+
+    // Tampilkan kelompok, nama dan nim pembuat
+    attron(COLOR_PAIR(4)); // beri warna biru
+    mvprintw(25, 10, "By Kelompok 9 (TIRIZZ):");
+    mvprintw(26, 10, "Ikhsan Satriadi");
+    mvprintw(26, 35, "241511080");
+    mvprintw(27, 10, "Rizky Satria Gunawan");
+    mvprintw(27, 35, "241511089");
+    attroff(COLOR_PAIR(4)); // hapus warna biru
 
     choice = getch(); // Ambil input dari pengguna
 
@@ -92,7 +103,6 @@ void show_menu(GameData *game_data)
       break;
     }
   } while (1);
-  attroff(COLOR_PAIR(3)); // hapus warna kuning
 }
 
 // Prosedur untuk mengatur level permainan

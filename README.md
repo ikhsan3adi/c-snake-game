@@ -1,10 +1,12 @@
 # Tugas Besar Praktikum Dasar-Dasar Pemrograman
 
-| | | |
-| --- | --- | --- |
-| ![main_menu](./images/main_menu.png) | ![in_game](./images/in_game.png) | ![level_menu](./images/level_menu.png) |
+![main_menu](./images/main_menu.png)
 
 Program ini adalah implementasi permainan klasik Snake yang dikembangkan sebagai tugas besar untuk mata kuliah Dasar-Dasar Pemrograman. Permainan ini bertujuan untuk memberikan pengalaman interaktif kepada pengguna dengan kontrol menggunakan keyboard dan tampilan yang sederhana di console.
+
+| | | | | |
+| --- | --- | --- | --- | --- |
+| ![level_menu](./images/level_menu.png) | ![in_game](./images/in_game.png) | ![new_hi_score](./images/new_hi_score.png) | ![pause](./images/pause.png) | ![game_over](./images/game_over.png) |
 
 ## Anggota Kelompok
 

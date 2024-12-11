@@ -8,8 +8,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "game.h"
-#include "ui.h"
 #include "gamedata.h"
+#include "ui.h"
 
 #define SCREEN_WIDTH 50           // lebar default area permainan
 #define SCREEN_HEIGHT 30          // tinggi default area permainan
@@ -17,6 +17,10 @@
 
 int main(int argc, char *argv[])
 {
+  // Kamus data
+  GameData game_data; // variabel untuk menyimpan data permainan
+  Game game;          // variabel untuk menyimpan state permainan
+
   // Inisialisasi dimensi layar
   int screen_width = SCREEN_WIDTH;
   int screen_height = SCREEN_HEIGHT;
@@ -25,13 +29,13 @@ int main(int argc, char *argv[])
   initialize_ui();
 
   // Muat data permainan dari file
-  GameData game_data = load_game_data(GAME_DATA_FILE);
+  game_data = load_game_data(GAME_DATA_FILE);
 
   // Tampilkan menu
   show_menu(&game_data);
 
   // Buat permainan
-  Game game = game_create(screen_width, screen_height, &game_data);
+  game = game_create(screen_width, screen_height, &game_data);
 
   // Loop utama permainan
   while (game.is_running)

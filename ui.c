@@ -27,19 +27,20 @@ void initialize_ui()
   curs_set(0);           // Menyembunyikan kursor
   nodelay(stdscr, TRUE); // Mengatur input non-blocking, sehingga getch() tidak menunggu input
 
-  // Inisialisasi warna
+  // cek apakah terminal mendukung warna
   if (has_colors() == FALSE)
   {
     endwin();                                            // Mengakhiri mode curses jika terminal tidak mendukung warna
     fprintf(stderr, "Terminal tidak mendukung warna\n"); // Menampilkan pesan kesalahan
     exit(1);                                             // Keluar dari program dengan status kesalahan
   }
+
   // Inisialisasi warna
   start_color();
-  init_pair(1, COLOR_RED, COLOR_BLACK);    // warna merah 1
-  init_pair(2, COLOR_GREEN, COLOR_BLACK);  // warna hijau 2
-  init_pair(3, COLOR_YELLOW, COLOR_BLACK); // warna kuning 3
-  init_pair(4, COLOR_CYAN, COLOR_BLACK);   // warna biru muda 4
+  init_pair(1, COLOR_RED, COLOR_BLACK);    // warna merah, background hitam = 1
+  init_pair(2, COLOR_GREEN, COLOR_BLACK);  // warna hijau, background hitam = 2
+  init_pair(3, COLOR_YELLOW, COLOR_BLACK); // warna kuning, background hitam = 3
+  init_pair(4, COLOR_CYAN, COLOR_BLACK);   // warna biru muda, background hitam = 4
 }
 
 // Prosedur untuk menampilkan judul game dengan ascii art
@@ -59,7 +60,9 @@ void show_title()
 // game_data: parameter input/output passing by reference, menunjuk ke objek GameData yang menyimpan data permainan
 void show_menu(GameData *game_data)
 {
+  // Kamus
   int choice; // Variabel untuk menyimpan pilihan pengguna
+
   do
   {
     erase(); // Bersihkan layar

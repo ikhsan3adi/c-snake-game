@@ -13,7 +13,8 @@
 // Mengembalikan objek permainan baru bertipe Game
 Game game_create(int screen_width, int screen_height, GameData *game_data)
 {
-  Game new_game = {0};
+  // Kamus data
+  Game new_game;
 
   // Inisialisasi dimensi layar
   new_game.screen_width = screen_width;

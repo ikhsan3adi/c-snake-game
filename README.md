@@ -111,5 +111,5 @@ Program ini terdiri dari beberapa file sumber yang masing-masing memiliki tanggu
 Setelah program berhasil dikompilasi, gunakan perintah berikut untuk menjalankan program:
 
 ```sh
-./snake
+./build/snake
 ```

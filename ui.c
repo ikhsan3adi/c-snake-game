@@ -99,7 +99,7 @@ void show_menu(GameData *game_data)
       return; // Kembali ke permainan
     case '2':
       // Panggil fungsi untuk mengatur level
-      set_game_level(game_data);
+      show_game_level_menu(game_data);
       break;
     case '3':
       quit_game(); // Keluar dari permainan
@@ -108,9 +108,9 @@ void show_menu(GameData *game_data)
   } while (1);
 }
 
-// Prosedur untuk mengatur level permainan
+// Prosedur untuk menampilkan pengaturan level permainan
 // game_data: parameter input/output passing by reference, menunjuk ke objek GameData yang menyimpan data permainan
-void set_game_level(GameData *game_data)
+void show_game_level_menu(GameData *game_data)
 {
   int level_choice; // Variabel untuk menyimpan pilihan pengguna
   do

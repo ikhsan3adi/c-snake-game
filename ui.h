@@ -20,9 +20,9 @@ void show_title();
 // game_data: parameter input/output passing by reference, menunjuk ke objek GameData yang menyimpan data permainan
 void show_menu(GameData *game_data);
 
-// Prosedur untuk mengatur level permainan
+// Prosedur untuk menampilkan pengaturan level permainan
 // game_data: parameter input/output passing by reference, menunjuk ke objek GameData yang menyimpan data permainan
-void set_game_level(GameData *game_data);
+void show_game_level_menu(GameData *game_data);
 
 // Prosedur untuk merender tampilan permainan
 // game: parameter input, menunjuk ke objek Game yang akan dirender

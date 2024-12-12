@@ -10,7 +10,7 @@
 #include <curses.h>
 #include "ui.h"
 
-char buffer[100]; // Buffer untuk menyimpan text sementara
+char buffer[100]; // Buffer untuk menyimpan text sementara, variabel global
 
 // Prosedur untuk menginisialisasi antarmuka pengguna (UI)
 // Mengatur tampilan, warna, dan pengaturan awal untuk tampilan permainan.
@@ -67,7 +67,7 @@ void show_menu(GameData *game_data)
   {
     erase(); // Bersihkan layar
 
-    show_title();
+    show_title(); // Tampilkan judul
 
     // tampilkan hi-score saat ini
     sprintf(buffer, "Hi-Score: %d | %s", game_data->hi_score.score, game_data->hi_score.player_name);
@@ -117,7 +117,7 @@ void set_game_level(GameData *game_data)
   {
     erase(); // Bersihkan layar
 
-    show_title();
+    show_title(); // Tampilkan judul
 
     attron(COLOR_PAIR(3)); // beri warna kuning
     mvprintw(9, 10, "=== Atur Level ===");
@@ -257,54 +257,58 @@ void draw_border(int y, int x, int width, int height)
 // Menampilkan pesan game over atau kemenangan, serta instruksi untuk memulai ulang permainan.
 void show_game_over_ui(Game *game)
 {
-  // Tampilkan pesan game over
-  attron(COLOR_PAIR(3));
-
-  if (game->game_snake.length >= MAX_SNAKE_LENGTH)
+  // Jika menang, tampilkan pesan kemenangan
+  if (game->is_winning)
   {
+    attron(COLOR_PAIR(4)); // Aktifkan warna biru
+
     // Pesan kemenangan di tengah layar
     mvaddstr(game->screen_height / 2,
              game->screen_width - 10,
              "  Selamat! Anda Menang!  ");
+    attroff(COLOR_PAIR(4)); // Nonaktifkan warna biru
+
+    attron(COLOR_PAIR(3)); // Aktifkan warna kuning
     mvaddstr(game->screen_height / 2 + 1,
              game->screen_width - 11,
-             "Tekan SPACE untuk main ulang");
-    mvaddstr(game->screen_height / 2 + 2,
-             game->screen_width - 14,
-             "Tekan ENTER untuk kembali ke menu");
-    mvaddstr(game->screen_height / 2 + 3,
-             game->screen_width - 8,
-             "Tekan ESC untuk keluar");
+             "Tekan SPACE untuk main lagi");
+    attroff(COLOR_PAIR(3)); // Nonaktifkan warna kuning-
   }
   else
   {
     if (game->is_pause) // tampilkan pesan berbeda jika pause
     {
+      attron(COLOR_PAIR(3)); // Aktifkan warna kuning
       mvaddstr(game->screen_height / 2,
                game->screen_width - 10,
                "         Paused         ");
       mvaddstr(game->screen_height / 2 + 1,
                game->screen_width - 16,
                "Tekan SPACE untuk melanjutkan (resume)");
+      attroff(COLOR_PAIR(3)); // Nonaktifkan warna kuning-
     }
     else // Pesan game over
     {
+      attron(COLOR_PAIR(1)); // Aktifkan warna merah
       mvaddstr(game->screen_height / 2,
                game->screen_width - 10,
                "        Game Over        ");
+      attroff(COLOR_PAIR(1)); // Nonaktifkan warna merah
+      attron(COLOR_PAIR(3));  // Aktifkan warna kuning
       mvaddstr(game->screen_height / 2 + 1,
                game->screen_width - 10,
                "Tekan SPACE untuk restart");
+      attroff(COLOR_PAIR(3)); // Nonaktifkan warna kuning
     }
-
-    // tampilkan instruksi untuk pergi ke menu atau keluar
-    mvaddstr(game->screen_height / 2 + 2,
-             game->screen_width - 14,
-             "Tekan ENTER untuk kembali ke menu");
-    mvaddstr(game->screen_height / 2 + 3,
-             game->screen_width - 8,
-             "Tekan ESC untuk keluar");
   }
+  attron(COLOR_PAIR(3)); // Aktifkan warna kuning
+  mvaddstr(game->screen_height / 2 + 2,
+           game->screen_width - 14,
+           "Tekan ENTER untuk kembali ke menu");
+  mvaddstr(game->screen_height / 2 + 3,
+           game->screen_width - 8,
+           "Tekan ESC untuk keluar");
+  attroff(COLOR_PAIR(3)); // Nonaktifkan warna kuning
 }
 
 // Prosedur untuk menampilkan dan mengambil input nama player

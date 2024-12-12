@@ -5,7 +5,6 @@
 // Pembuat      : Ikhsan Satriadi / 241511080
 //                Rizky Satria Gunawan / 241511089
 
-#include <stdlib.h>
 #include <unistd.h>
 #include "game.h"
 #include "gamedata.h"

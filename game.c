@@ -63,6 +63,14 @@ void game_update(Game *game)
     return;
   }
 
+  //* Cek apakah skor sudah mencapai maksimal skor, jika iya maka game berhenti dan menang
+  if (game->current_score.score >= MAX_SNAKE_LENGTH)
+  {
+    game->is_running = false;
+    game->is_winning = true; // menang!
+    return;
+  }
+
   // Cek tabrakan dengan makanan
   if (vector2_equals(game->game_food.position, game->game_snake.head))
   {
@@ -90,9 +98,7 @@ bool is_game_over(Game *game)
 
   // Cek jika tabrakan dengan ular itu sendiri
   if (snake_collides_with_self(snake))
-  {
     return true;
-  }
 
   // Cek jika tabrakan dengan batas layar
   return !vector2_is_in_bounds(

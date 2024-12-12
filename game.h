@@ -23,6 +23,7 @@ typedef struct
   Settings settings;   // Pengaturan game
   bool is_running;     // Status permainan (game over)
   bool is_pause;       // Status permainan (pause)
+  bool is_winning;     // Status permainan (menang)
   int screen_width;    // Lebar layar
   int screen_height;   // Tinggi layar
 } Game;

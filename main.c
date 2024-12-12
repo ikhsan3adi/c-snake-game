@@ -43,10 +43,10 @@ int main(int argc, char *argv[])
     // Tangani input
     ui_handle_input(&game, NULL);
 
-    // Perbarui logika permainan
+    // Perbarui logika permainan, update Game state
     game_update(&game);
 
-    // Render
+    // Render tampilan berdasarkan state game
     render_ui(&game);
 
     // Tampilkan tampilan game over/pause jika tidak sedang berjalan
@@ -59,7 +59,8 @@ int main(int argc, char *argv[])
         set_game_hi_score(&game, &game_data, game.current_score); // perbarui hi-score
       }
 
-      save_game_data(GAME_DATA_FILE, &game_data); // simpan data game terbaru
+      // simpan data game terbaru
+      save_game_data(GAME_DATA_FILE, &game_data);
 
       show_game_over_ui(&game);                 // Tampilkan UI game over
       while (!game.is_running || game.is_pause) // Menunggu input

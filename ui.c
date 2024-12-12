@@ -311,6 +311,7 @@ void show_game_over_ui(Game *game)
 // game: parameter input/output passing by reference, menunjuk ke objek Game yang akan diperbarui berdasarkan input
 void get_player_name(Game *game)
 {
+  // Kamus
   char player_name[50];                            // Buffer untuk menyimpan nama pemain
                                                    //
   attron(COLOR_PAIR(2));                           // Menggunakan warna hijau

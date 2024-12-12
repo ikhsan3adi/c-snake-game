@@ -21,11 +21,14 @@ void save_game_data(const char *filename, GameData *game_data)
   fclose(file);
 }
 
-// Prosedur untuk memuat data permainan dari file biner
+// Fungsi untuk memuat data permainan dari file biner
 // filename: parameter input passing by value, tipe const char*, nama file untuk dimuat datanya
+// Mengembalikan GameData dari file atau GameData dengan nilai default
 GameData load_game_data(const char *filename)
 {
-  GameData game_data;
+  // kamus
+  GameData game_data; // tempat menyimpan data game dari file
+
   FILE *file = fopen(filename, "rb"); // Membuka file dalam mode read binary
   if (file != NULL)
   {

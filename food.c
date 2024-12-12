@@ -14,11 +14,9 @@
 // Mengembalikan objek makanan baru bertipe Food
 Food create_food(int screen_width, int screen_height, Snake *snake)
 {
-  // Buat posisi untuk makanan
-  Vector2 food_pos = food_generate_position(screen_width, screen_height, snake);
-
-  // Buat objek makanan
-  Food new_food = {food_pos};
+  // Kamus
+  Vector2 food_pos = food_generate_position(screen_width, screen_height, snake); // Buat posisi untuk makanan
+  Food new_food = {food_pos};                                                    // Buat objek makanan dengan posisi `food_pos`
 
   return new_food;
 }
@@ -30,9 +28,9 @@ Food create_food(int screen_width, int screen_height, Snake *snake)
 // Mengembalikan posisi makanan yang valid bertipe Vector2
 Vector2 food_generate_position(int screen_width, int screen_height, Snake *snake)
 {
-  // Deklarasi variabel untuk menyimpan posisi makanan
-  Vector2 new_position;
-  bool valid_position; // variabel untuk menyimpan status validitas posisi
+  // Kamus
+  Vector2 new_position; // Deklarasi variabel untuk menyimpan posisi makanan
+  bool valid_position;  // variabel untuk menyimpan status validitas posisi
 
   do
   {

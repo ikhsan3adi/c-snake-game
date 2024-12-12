@@ -13,12 +13,13 @@
 // Mengembalikan objek ular baru bertipe Snake
 Snake create_snake(int start_x, int start_y)
 {
-  Snake new_snake = {0};                             // buat objek ular
+  // Kamus
+  Snake new_snake; // buat objek ular baru
+
   new_snake.head = vector2_create(start_x, start_y); // buat posisi kepala ular
   new_snake.direction = vector2_create(1, 0);        // arah ular
   new_snake.length = 1;                              // panjang awal
-
-  new_snake.segments[0] = new_snake.head; // simpan posisi kepala ke dalam array segment
+  new_snake.segments[0] = new_snake.head;            // simpan posisi kepala ke dalam segment pertama
 
   return new_snake;
 }
@@ -56,7 +57,7 @@ bool snake_collides_with_self(Snake *snake)
 // Mengembalikan true jika ular berhasil tumbuh, false jika tidak (misalnya, jika sudah mencapai panjang maksimum)
 bool snake_grow(Snake *snake)
 {
-  if (snake->length < MAX_SNAKE_LENGTH)
+  if (snake->length < MAX_SNAKE_LENGTH) // Cek apakah ular sudah mencapai panjang maksimum
   {
     snake->length = snake->length + 1; // Tambahkan satu segmen baru
     return true;
@@ -69,15 +70,13 @@ bool snake_grow(Snake *snake)
 // Mengembalikan karakter yang merepresentasikan kepala ular ('>', '<', 'v', '^')
 char get_snake_head_symbol(Snake *snake)
 {
-  Vector2 dir = snake->direction;
-
-  if (dir.x == 1)
+  if (snake->direction.x == 1)
     return '>'; // kanan
-  if (dir.x == -1)
+  if (snake->direction.x == -1)
     return '<'; // kiri
-  if (dir.y == 1)
+  if (snake->direction.y == 1)
     return 'v'; // bawah
-  if (dir.y == -1)
+  if (snake->direction.y == -1)
     return '^'; // atas
 
   return '>'; // default

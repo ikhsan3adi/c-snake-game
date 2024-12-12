@@ -13,7 +13,7 @@
 // Mengembalikan vektor baru dengan koordinat (x, y) bertipe Vector2
 Vector2 vector2_create(int x, int y)
 {
-  Vector2 vec = {x, y};
+  Vector2 vec = {x, y}; // Inisialisasi vektor baru dengan koordinat (x, y)
   return vec;
 }
 
@@ -32,7 +32,7 @@ bool vector2_equals(Vector2 a, Vector2 b)
 // Mengembalikan hasil penjumlahan kedua vektor bertipe Vector2
 Vector2 vector2_add(Vector2 a, Vector2 b)
 {
-  Vector2 vec = {a.x + b.x, a.y + b.y};
+  Vector2 vec = {a.x + b.x, a.y + b.y}; // Inisialisasi hasil penjumlahan dengan koordinat (a.x + b.x, a.y + b.y)
   return vec;
 }
 

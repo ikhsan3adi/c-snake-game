@@ -14,7 +14,7 @@
 Game game_create(int screen_width, int screen_height, GameData *game_data)
 {
   // Kamus data
-  Game new_game;
+  Game new_game; // Objek permainan baru
 
   // Inisialisasi dimensi layar
   new_game.screen_width = screen_width;
@@ -85,7 +85,8 @@ void game_update(Game *game)
 // Mengembalikan true jika permainan berakhir, false jika tidak
 bool is_game_over(Game *game)
 {
-  Snake *snake = &game->game_snake;
+  // Kamus
+  Snake *snake = &game->game_snake; // Ambil reference snake dari game
 
   // Cek jika tabrakan dengan ular itu sendiri
   if (snake_collides_with_self(snake))
@@ -105,7 +106,7 @@ bool is_game_over(Game *game)
 // game_data: parameter output passing by reference, tipe GameData*, menunjuk ke objek data permainan
 void game_restart(Game *game, GameData *game_data)
 {
-  *game = game_create(game->screen_width, game->screen_height, game_data);
+  *game = game_create(game->screen_width, game->screen_height, game_data); // assign game dengan game baru
 }
 
 // Prosedur untuk menangani input dari pengguna untuk mengubah arah pergerakan ular

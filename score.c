@@ -13,9 +13,11 @@
 // Mengembalikan objek Score
 Score create_score(int score, char *player_name)
 {
-  Score new_score;
+  // Kamus
+  Score new_score; // Deklarasi objek Score baru
+
   strcpy(new_score.player_name, player_name); // salin player_name ke new_score.player_name
-  new_score.score = score;
+  new_score.score = score;                    // assign score ke new_score.score
 
   return new_score;
 }

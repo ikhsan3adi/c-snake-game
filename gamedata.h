@@ -23,8 +23,9 @@ typedef struct
 // game_data: parameter input passing by reference, tipe GameData*, pointer ke objek GameData yang akan disimpan
 void save_game_data(const char *filename, GameData *game_data);
 
-// Prosedur untuk memuat data permainan dari file biner
+// Fungsi untuk memuat data permainan dari file biner
 // filename: parameter input passing by value, tipe const char*, nama file untuk dimuat datanya
+// Mengembalikan GameData dari file atau GameData dengan nilai default
 GameData load_game_data(const char *filename);
 
 //! Prosedur untuk menghapus data permainan (belum dipakai)

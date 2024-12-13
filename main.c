@@ -36,6 +36,9 @@ int main(int argc, char *argv[])
   // Buat permainan
   game = game_create(screen_width, screen_height, &game_data);
 
+  // Tampilkan guide permainan saat pertama kali
+  show_guides(&game);
+
   // Loop utama permainan
   while (game.is_running)
   {
@@ -54,7 +57,7 @@ int main(int argc, char *argv[])
       // Cek apakah skor saat ini melebihi hi-score (kecuali pause)
       if (game.current_score.score > game.hi_score.score && !game.is_pause)
       {
-        get_player_name(&game);                                   // ambil dan assign nama pemain ke game score
+        get_hi_score_player_name(&game);                          // ambil dan assign nama pemain ke game score
         set_game_hi_score(&game, &game_data, game.current_score); // perbarui hi-score
       }
 

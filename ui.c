@@ -60,9 +60,6 @@ void show_title()
 // game_data: parameter input/output passing by reference, menunjuk ke objek GameData yang menyimpan data permainan
 void show_menu(GameData *game_data)
 {
-  // Kamus
-  int choice; // Variabel untuk menyimpan pilihan pengguna
-
   do
   {
     erase(); // Bersihkan layar
@@ -78,41 +75,37 @@ void show_menu(GameData *game_data)
     mvprintw(11, 10, "1. Main");
     sprintf(buffer, "2. Atur Level (Level: %d)", game_data->settings.level); // menampilkan level saat ini
     mvprintw(12, 10, buffer);
-    mvprintw(13, 10, "3. Keluar");
-    mvprintw(15, 10, "Pilih opsi (1-3): ");
+    mvprintw(13, 10, "3. Leaderboard");
+    mvprintw(14, 10, "4. Keluar");
+    mvprintw(16, 10, "Pilih opsi (1-3): ");
     attroff(COLOR_PAIR(3)); // hapus warna kuning
 
-    // Tampilkan kelompok, nama dan nim pembuat
-    attron(COLOR_PAIR(4)); // beri warna biru
-    mvprintw(25, 10, "By Kelompok 9 (TIRIZZ):");
-    mvprintw(26, 10, "Ikhsan Satriadi");
-    mvprintw(26, 35, "241511080");
-    mvprintw(27, 10, "Rizky Satria Gunawan");
-    mvprintw(27, 35, "241511089");
-    attroff(COLOR_PAIR(4)); // hapus warna biru
+    show_copyright(); // Tampilkan copyright
 
-    choice = getch(); // Ambil input dari pengguna
-
-    switch (choice)
+    switch (getch()) // Ambil input dari pengguna
     {
     case '1':
       return; // Kembali ke permainan
     case '2':
-      // Panggil fungsi untuk mengatur level
+      // Panggil prosedur untuk mengatur level
       show_game_level_menu(game_data);
       break;
     case '3':
+      // Panggil prosedur untuk melihat leaderboard
+      // show_leaderboard();
+      break;
+    case '4':      // 4 untuk keluar
+    case 27:       // ESC untuk keluar
       quit_game(); // Keluar dari permainan
       break;
     }
-  } while (1);
+  } while (true);
 }
 
 // Prosedur untuk menampilkan pengaturan level permainan
 // game_data: parameter input/output passing by reference, menunjuk ke objek GameData yang menyimpan data permainan
 void show_game_level_menu(GameData *game_data)
 {
-  int level_choice; // Variabel untuk menyimpan pilihan pengguna
   do
   {
     erase(); // Bersihkan layar
@@ -135,12 +128,11 @@ void show_game_level_menu(GameData *game_data)
     attroff(COLOR_PAIR(1)); // hapus warna merah
     mvprintw(16, 10, "6. Kembali");
     mvprintw(18, 10, "Pilih opsi (1-6): ");
-    refresh();
 
-    level_choice = getch(); // Ambil input dari pengguna
+    show_copyright(); // Tampilkan copyright
 
     // update level dan speed game berdasarkan pilihan pengguna
-    switch (level_choice)
+    switch (getch()) // Ambil input dari pengguna
     {
     case '1':
       update_settings(&game_data->settings, 1, SPEED_1); // Level 1
@@ -160,7 +152,20 @@ void show_game_level_menu(GameData *game_data)
     case '6': // kembali
       return;
     }
-  } while (1);
+  } while (true);
+}
+
+// Prosedur untuk menampilkan nama pembuat dan kelompok
+// Tampilkan kelompok, nama dan nim pembuat
+void show_copyright()
+{
+  attron(COLOR_PAIR(4)); // beri warna biru
+  mvprintw(25, 10, "By Kelompok 9:");
+  mvprintw(26, 10, "Ikhsan Satriadi");
+  mvprintw(26, 35, "241511080");
+  mvprintw(27, 10, "Rizky Satria Gunawan");
+  mvprintw(27, 35, "241511089");
+  attroff(COLOR_PAIR(4)); // hapus warna biru
 }
 
 // Prosedur untuk merender tampilan permainan
@@ -170,46 +175,61 @@ void render_ui(Game *game)
 {
   erase(); // Bersihkan layar
 
+  // buat border
+  draw_border(0, 0, game->screen_width, game->screen_height);
+
+  // tampilkan makanan
+  draw_food(game);
+
+  // tampilkan ular
+  draw_snake(game);
+
+  // tampilkan skor saat ini
+  show_in_game_score(game);
+
+  // tampilkan hi-score(skor tertinggi) saat ini
+  show_in_game_hi_score(game);
+
+  // tampilkan level saat ini
+  show_in_game_level(game);
+}
+
+// Prosedur untuk menampilkan panduan permainan sebelum dimulai
+// game: parameter input, menunjuk ke objek Game untuk mengambil informasi permainan
+void show_guides(Game *game)
+{
+  erase(); // Bersihkan layar
+
   // Buat border
-  attron(COLOR_PAIR(3));                                      // Menggunakan warna border (kuning)
-  draw_border(0, 0, game->screen_width, game->screen_height); // Gambar border
-  attroff(COLOR_PAIR(3));                                     // Menonaktifkan kembali warna border (kuning)
+  attron(COLOR_PAIR(3)); // Menggunakan warna border (kuning)
+  draw_border(0, 0, game->screen_width, game->screen_height);
+  attroff(COLOR_PAIR(3)); // Menonaktifkan kembali warna border (kuning)
 
-  // Gambar makanan
-  attron(COLOR_PAIR(1)); // Menggunakan warna makanan (merah)
-  // Gambar makanan berdasarkan posisi dengan karakter '@'
-  mvaddch(game->game_food.position.y + 1,
-          game->game_food.position.x * 2 + 1,
-          '@');
-  attroff(COLOR_PAIR(1)); // Menonaktifkan kembali warna makanan (merah)
+  sprintf(buffer, " Petunjuk ");
+  mvaddstr(game->screen_height / 2 - 1,
+           game->screen_width - strlen(buffer) / 3 - 1,
+           buffer);
+  sprintf(buffer, " Arahkan ular dengan arrow keys ← ↑ → ↓ ");
+  mvaddstr(game->screen_height / 2,
+           game->screen_width - strlen(buffer) / 3 - 2,
+           buffer);
+  sprintf(buffer, " Tekan ESC untuk pause ");
+  mvaddstr(game->screen_height / 2 + 1,
+           game->screen_width - strlen(buffer) / 3 - 3,
+           buffer);
+  sprintf(buffer, " ENTER: OK ");
+  mvaddstr(game->screen_height / 2 + 2,
+           game->screen_width - strlen(buffer) / 3 - 1,
+           buffer);
 
-  // Gambar badan/segmen ular
-  attron(COLOR_PAIR(2));                            // Menggunakan warna ular (hijau)
-  for (int i = 0; i < game->game_snake.length; i++) // Gambar segmen ular
+  do
   {
-    // Gambar segmen ular berdasarkan posisi dengan karakter 'o'
-    mvaddch(game->game_snake.segments[i].y + 1,
-            game->game_snake.segments[i].x * 2 + 1,
-            'o');
-  }
-
-  // Gambar kepala ular berdasarkan posisi dan karakter berdasarkan arah pergerakan ular `get_snake_head_symbol`
-  mvaddch(game->game_snake.head.y + 1,
-          game->game_snake.head.x * 2 + 1,
-          get_snake_head_symbol(&game->game_snake));
-  attroff(COLOR_PAIR(2)); // Menonaktifkan kembali warna ular (hijau)
-
-  // Tampilkan skor
-  sprintf(buffer, " Score: %d ", game->current_score.score);
-  mvaddstr(0, game->screen_width - (strlen(buffer) / 2), buffer); // tampilkan skor di tengah atas
-
-  // Tampilkan hi-score
-  sprintf(buffer, " Hi-Score: %d | %s ", game->hi_score.score, game->hi_score.player_name);
-  mvaddstr(game->screen_height + 1, 2, buffer); // tampilkan hi-score di kiri bawah
-
-  // Tampilkan level saat ini
-  sprintf(buffer, " Level: %d ", game->settings.level);
-  mvaddstr(game->screen_height + 1, game->screen_width * 2 - 10, buffer); // tampilkan level di kanan bawah
+    switch (getch()) // Menunggu input dari user
+    {
+    case '\n': // jika user menekan ENTER, keluar dari prosedur
+      return;
+    }
+  } while (true);
 }
 
 // Prosedur untuk menggambar batas layar
@@ -220,6 +240,8 @@ void render_ui(Game *game)
 // Menggambar batas permainan di layar.
 void draw_border(int y, int x, int width, int height)
 {
+  attron(COLOR_PAIR(3)); // Menggunakan warna kuning
+
   // Sudut kiri atas
   mvaddch(y, x, ACS_ULCORNER);
 
@@ -250,6 +272,67 @@ void draw_border(int y, int x, int width, int height)
   {
     mvaddch(y + height + 1, x + i, ACS_HLINE);
   }
+  attroff(COLOR_PAIR(3)); // Menonaktifkan warna kuning
+}
+
+// Prosedur untuk menampilkan makanan ular ke layar
+// game: parameter input, menunjuk ke objek Game untuk mengambil informasi permainan
+void draw_food(Game *game)
+{
+  attron(COLOR_PAIR(1)); // Menggunakan warna makanan (merah)
+  // Gambar makanan berdasarkan posisi dengan karakter '@'
+  mvaddch(game->game_food.position.y + 1,
+          game->game_food.position.x * 2 + 1,
+          '@');
+  attroff(COLOR_PAIR(1)); // Menonaktifkan kembali warna makanan (merah)
+}
+
+// Prosedur untuk menampilkan ular ke layar
+// game: parameter input, menunjuk ke objek Game untuk mengambil informasi permainan
+void draw_snake(Game *game)
+{
+  // Gambar badan/segmen ular
+  attron(COLOR_PAIR(2));                            // Menggunakan warna ular (hijau)
+  for (int i = 0; i < game->game_snake.length; i++) // Gambar segmen ular
+  {
+    // Gambar segmen ular berdasarkan posisi dengan karakter 'o'
+    mvaddch(game->game_snake.segments[i].y + 1,
+            game->game_snake.segments[i].x * 2 + 1,
+            'o');
+  }
+
+  // Gambar kepala ular berdasarkan posisi dan karakter berdasarkan arah pergerakan ular `get_snake_head_symbol`
+  mvaddch(game->game_snake.head.y + 1,
+          game->game_snake.head.x * 2 + 1,
+          get_snake_head_symbol(&game->game_snake));
+  attroff(COLOR_PAIR(2)); // Menonaktifkan kembali warna ular (hijau)
+}
+
+// Prosedur untuk menampilkan score saat ini
+// game: parameter input, menunjuk ke objek Game untuk mengambil informasi permainan
+void show_in_game_score(Game *game)
+{
+  // Tampilkan skor
+  sprintf(buffer, " Score: %d ", game->current_score.score);
+  mvaddstr(0, 2, buffer); // tampilkan skor di tengah atas
+}
+
+// Prosedur untuk menampilkan hi-score saat ini
+// game: parameter input, menunjuk ke objek Game untuk mengambil informasi permainan
+void show_in_game_hi_score(Game *game)
+{
+  // Tampilkan hi-score
+  sprintf(buffer, " Hi-Score: %d | %s ", game->hi_score.score, game->hi_score.player_name);
+  mvaddstr(0, game->screen_width * 2 - strlen(buffer), buffer); // tampilkan hi-score di kiri bawah
+}
+
+// Prosedur untuk menampilkan level saat ini yang sedang dimainkan
+// game: parameter input, menunjuk ke objek Game untuk mengambil informasi permainan
+void show_in_game_level(Game *game)
+{
+  // Tampilkan level saat ini
+  sprintf(buffer, " Level: %d ", game->settings.level);
+  mvaddstr(game->screen_height + 1, 2, buffer); // tampilkan level di kanan atas
 }
 
 // Prosedur untuk menampilkan tampilan game over atau paused
@@ -263,13 +346,13 @@ void show_game_over_ui(Game *game)
     attron(COLOR_PAIR(4)); // Aktifkan warna biru
 
     // Pesan kemenangan di tengah layar
-    mvaddstr(game->screen_height / 2,
+    mvaddstr(game->screen_height / 2 - 1,
              game->screen_width - 10,
              "  Selamat! Anda Menang!  ");
     attroff(COLOR_PAIR(4)); // Nonaktifkan warna biru
 
     attron(COLOR_PAIR(3)); // Aktifkan warna kuning
-    mvaddstr(game->screen_height / 2 + 1,
+    mvaddstr(game->screen_height / 2,
              game->screen_width - 11,
              "Tekan SPACE untuk main lagi");
     attroff(COLOR_PAIR(3)); // Nonaktifkan warna kuning-
@@ -279,10 +362,10 @@ void show_game_over_ui(Game *game)
     if (game->is_pause) // tampilkan pesan berbeda jika pause
     {
       attron(COLOR_PAIR(3)); // Aktifkan warna kuning
-      mvaddstr(game->screen_height / 2,
+      mvaddstr(game->screen_height / 2 - 1,
                game->screen_width - 10,
                "         Paused         ");
-      mvaddstr(game->screen_height / 2 + 1,
+      mvaddstr(game->screen_height / 2,
                game->screen_width - 16,
                "Tekan SPACE untuk melanjutkan (resume)");
       attroff(COLOR_PAIR(3)); // Nonaktifkan warna kuning-
@@ -290,51 +373,50 @@ void show_game_over_ui(Game *game)
     else // Pesan game over
     {
       attron(COLOR_PAIR(1)); // Aktifkan warna merah
-      mvaddstr(game->screen_height / 2,
+      mvaddstr(game->screen_height / 2 - 1,
                game->screen_width - 10,
                "        Game Over        ");
       attroff(COLOR_PAIR(1)); // Nonaktifkan warna merah
       attron(COLOR_PAIR(3));  // Aktifkan warna kuning
-      mvaddstr(game->screen_height / 2 + 1,
+      mvaddstr(game->screen_height / 2,
                game->screen_width - 10,
                "Tekan SPACE untuk restart");
       attroff(COLOR_PAIR(3)); // Nonaktifkan warna kuning
     }
   }
   attron(COLOR_PAIR(3)); // Aktifkan warna kuning
-  mvaddstr(game->screen_height / 2 + 2,
+  mvaddstr(game->screen_height / 2 + 1,
            game->screen_width - 14,
            "Tekan ENTER untuk kembali ke menu");
-  mvaddstr(game->screen_height / 2 + 3,
+  mvaddstr(game->screen_height / 2 + 2,
            game->screen_width - 8,
            "Tekan ESC untuk keluar");
   attroff(COLOR_PAIR(3)); // Nonaktifkan warna kuning
 }
 
-// Prosedur untuk menampilkan dan mengambil input nama player
+// Prosedur untuk menampilkan dan mengambil input nama player yang dapat hi-score baru
 // game: parameter input/output passing by reference, menunjuk ke objek Game yang akan diperbarui berdasarkan input
-void get_player_name(Game *game)
+void get_hi_score_player_name(Game *game)
 {
-  // Kamus
-  char player_name[50];                            // Buffer untuk menyimpan nama pemain
-                                                   //
-  attron(COLOR_PAIR(2));                           // Menggunakan warna hijau
-  mvaddstr(game->screen_height / 2 - 1,            // Tampilkan prompt
-           game->screen_width - 10,                //
-           "  Skor Tertinggi Baru!  ");            //
-  mvaddstr(game->screen_height / 2,                // Tampilkan prompt
-           game->screen_width - 10,                //
-           "  Masukkan nama anda : ");             //
-                                                   //
-  echo();                                          // Aktifkan echo untuk menampilkan input
-  mvgetnstr(game->screen_height / 2 + 1,           // Ambil input nama pemain
-            game->screen_width - 8,                //
-            player_name, sizeof(player_name) - 1); //
-  attroff(COLOR_PAIR(2));                          // Nonaktifkan warna hijau
-  noecho();                                        // Nonaktifkan echo setelah input
+  attron(COLOR_PAIR(2)); // Menggunakan warna hijau
 
-  // Simpan nama pemain ke score
-  strcpy(game->current_score.player_name, player_name);
+  // Tampilkan prompt
+  mvaddstr(game->screen_height / 2 - 1,
+           game->screen_width - 10,
+           "  Skor Tertinggi Baru!  ");
+  mvaddstr(game->screen_height / 2,
+           game->screen_width - 10,
+           "  Masukkan nama anda : ");
+
+  echo();                                // Aktifkan echo untuk menampilkan input
+  mvgetnstr(game->screen_height / 2 + 1, // Ambil input nama pemain
+            game->screen_width - 8,      //
+            buffer, sizeof(buffer) - 1); //
+  attroff(COLOR_PAIR(2));                // Nonaktifkan warna hijau
+  noecho();                              // Nonaktifkan echo setelah input
+
+  // Simpan nama pemain ke player name current score
+  strcpy(game->current_score.player_name, buffer);
   erase(); // bersihkan layar
 }
 
@@ -343,9 +425,7 @@ void get_player_name(Game *game)
 // game_data: parameter input/output passing by reference, menunjuk ke objek GameData yang menyimpan data permainan
 void ui_handle_input(Game *game, GameData *game_data)
 {
-  int ch = getch(); // Mendapatkan input
-
-  switch (ch)
+  switch (getch()) // Mendapatkan input
   {
   case KEY_LEFT:
     game_handle_input(game, vector2_create(-1, 0)); // Arahkan ular ke kiri

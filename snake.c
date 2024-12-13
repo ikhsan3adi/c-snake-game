@@ -31,12 +31,12 @@ void snake_move(Snake *snake)
   // Geser segmen dan update segmen berdasarkan panjang ular
   for (int i = snake->length; i > 0; i--)
   {
-    snake->segments[i] = snake->segments[i - 1];
+    snake->segments[i] = snake->segments[i - 1]; // segmen saat ini diassign dengan nilai segmen sebelumnya
   }
 
   // Perbarui kepala
   snake->segments[0] = snake->head;
-  snake->head = vector2_add(snake->head, snake->direction);
+  snake->head = vector2_add(snake->head, snake->direction); // geser kepala ke arah yang ditentukan sesuai vektor direction
 }
 
 // Fungsi untuk memeriksa apakah ular bertabrakan dengan dirinya sendiri

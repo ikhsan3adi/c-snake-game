@@ -17,8 +17,8 @@ void save_game_data(const char *filename, GameData *game_data)
   if (file != NULL)
   {
     fwrite(game_data, sizeof(GameData), 1, file); // Menyimpan objek GameData ke file
+    fclose(file);
   }
-  fclose(file);
 }
 
 // Fungsi untuk memuat data permainan dari file biner
@@ -33,6 +33,7 @@ GameData load_game_data(const char *filename)
   if (file != NULL)
   {
     fread(&game_data, sizeof(GameData), 1, file); // Memuat objek GameData dari file
+    fclose(file);
   }
   else
   {
@@ -42,7 +43,6 @@ GameData load_game_data(const char *filename)
     game_data.settings.level = 2;
     game_data.settings.speed = SPEED_2;
   }
-  fclose(file);
   return game_data;
 }
 

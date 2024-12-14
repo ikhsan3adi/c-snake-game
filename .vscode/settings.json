@@ -7,6 +7,8 @@
     "**/.DS_Store": true,
     "**/Thumbs.db": true,
     "**/*.o": true,
+    "**/*.gch": true,
+    "**/*.out": true,
     // "include": true,
     // "lib": true
   }

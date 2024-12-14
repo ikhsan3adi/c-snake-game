@@ -1,6 +1,8 @@
 **/*.exe
 **/*.o
 **/*.dat
+**/*.gch
+**/*.out
 
 # for linux/macos
 snake

@@ -66,8 +66,9 @@ void show_in_game_level(Game *game);
 
 // Prosedur untuk menampilkan tampilan game over atau paused
 // game: parameter input, menunjuk ke objek Game yang akan ditampilkan
+// game_data: parameter input/output passing by reference, menunjuk ke objek GameData yang menyimpan data permainan
 // Menampilkan pesan game over atau kemenangan, serta instruksi untuk memulai ulang permainan.
-void show_game_over_ui(Game *game);
+void show_game_over_ui(Game *game, GameData *game_data);
 
 // Prosedur untuk menampilkan dan mengambil input nama player yang dapat hi-score baru
 // game: parameter input/output passing by reference, menunjuk ke objek Game yang akan diperbarui berdasarkan input
@@ -75,8 +76,7 @@ void get_hi_score_player_name(Game *game);
 
 // Prosedur untuk menangani input dari pengguna selama dalam permainan
 // game: parameter input/output passing by reference, menunjuk ke objek Game yang akan diperbarui berdasarkan input
-// game_data: parameter input/output passing by reference, menunjuk ke objek GameData yang menyimpan data permainan
-void ui_handle_input(Game *game, GameData *game_data);
+void ui_handle_input(Game *game);
 
 // Prosedur untuk keluar dari permainan
 // Menghentikan antarmuka pengguna dan membersihkan layar sebelum keluar dari program.

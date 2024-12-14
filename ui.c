@@ -10,6 +10,7 @@
 #include <curses.h>
 #include "ui.h"
 
+// Kamus data
 char buffer[100]; // Buffer untuk menyimpan text sementara, variabel global
 
 // Prosedur untuk menginisialisasi antarmuka pengguna (UI)
@@ -28,7 +29,7 @@ void initialize_ui()
   nodelay(stdscr, TRUE); // Mengatur input non-blocking, sehingga getch() tidak menunggu input
 
   // cek apakah terminal mendukung warna
-  if (has_colors() == FALSE)
+  if (!has_colors())
   {
     endwin();                                            // Mengakhiri mode curses jika terminal tidak mendukung warna
     fprintf(stderr, "Terminal tidak mendukung warna\n"); // Menampilkan pesan kesalahan
@@ -67,14 +68,12 @@ void show_menu(GameData *game_data)
     show_title(); // Tampilkan judul
 
     // tampilkan hi-score saat ini
-    sprintf(buffer, "Hi-Score: %d | %s", game_data->hi_score.score, game_data->hi_score.player_name);
-    mvprintw(9, 54, buffer);
+    mvprintw(9, 54, "Hi-Score: %d | %s", game_data->hi_score.score, game_data->hi_score.player_name);
 
     attron(COLOR_PAIR(3)); // beri warna kuning
     mvprintw(9, 10, "=== Menu ===");
     mvprintw(11, 10, "1. Main");
-    sprintf(buffer, "2. Atur Level (Level: %d)", game_data->settings.level); // menampilkan level saat ini
-    mvprintw(12, 10, buffer);
+    mvprintw(12, 10, "2. Atur Level (Level: %d)", game_data->settings.level); // menampilkan level saat ini
     mvprintw(13, 10, "3. Leaderboard");
     mvprintw(14, 10, "4. Keluar");
     mvprintw(16, 10, "Pilih opsi (1-3): ");
@@ -209,24 +208,26 @@ void show_guides(Game *game)
   mvaddstr(game->screen_height / 2 - 1,
            game->screen_width - strlen(buffer) / 3 - 1,
            buffer);
-  sprintf(buffer, " Arahkan ular dengan arrow keys ← ↑ → ↓ ");
+  sprintf(buffer, " Arahkan ular dengan arrow keys atau WASD ");
   mvaddstr(game->screen_height / 2,
-           game->screen_width - strlen(buffer) / 3 - 2,
+           game->screen_width - strlen(buffer) / 3 - 5,
            buffer);
-  sprintf(buffer, " Tekan ESC untuk pause ");
+  sprintf(buffer, " Tekan ESC/SPACE untuk pause ");
   mvaddstr(game->screen_height / 2 + 1,
-           game->screen_width - strlen(buffer) / 3 - 3,
+           game->screen_width - strlen(buffer) / 3 - 4,
            buffer);
-  sprintf(buffer, " ENTER: OK ");
+  sprintf(buffer, " ENTER/SPACE: OK ");
   mvaddstr(game->screen_height / 2 + 2,
-           game->screen_width - strlen(buffer) / 3 - 1,
+           game->screen_width - strlen(buffer) / 3 - 3,
            buffer);
 
   do
   {
     switch (getch()) // Menunggu input dari user
     {
-    case '\n': // jika user menekan ENTER, keluar dari prosedur
+    case ' ':
+    case '\n':
+    case '\r': // jika user menekan ENTER/SPACE, keluar dari prosedur dan lanjutkan ke permainan
       return;
     }
   } while (true);
@@ -337,8 +338,9 @@ void show_in_game_level(Game *game)
 
 // Prosedur untuk menampilkan tampilan game over atau paused
 // game: parameter input, menunjuk ke objek Game yang akan ditampilkan
+// game_data: parameter input/output passing by reference, menunjuk ke objek GameData yang menyimpan data permainan
 // Menampilkan pesan game over atau kemenangan, serta instruksi untuk memulai ulang permainan.
-void show_game_over_ui(Game *game)
+void show_game_over_ui(Game *game, GameData *game_data)
 {
   // Jika menang, tampilkan pesan kemenangan
   if (game->is_winning)
@@ -353,45 +355,61 @@ void show_game_over_ui(Game *game)
 
     attron(COLOR_PAIR(3)); // Aktifkan warna kuning
     mvaddstr(game->screen_height / 2,
-             game->screen_width - 11,
-             "Tekan SPACE untuk main lagi");
-    attroff(COLOR_PAIR(3)); // Nonaktifkan warna kuning-
+             game->screen_width - 12,
+             " Tekan SPACE untuk main lagi ");
   }
-  else
+  else if (game->is_pause) // tampilkan pesan berbeda jika pause
   {
-    if (game->is_pause) // tampilkan pesan berbeda jika pause
-    {
-      attron(COLOR_PAIR(3)); // Aktifkan warna kuning
-      mvaddstr(game->screen_height / 2 - 1,
-               game->screen_width - 10,
-               "         Paused         ");
-      mvaddstr(game->screen_height / 2,
-               game->screen_width - 16,
-               "Tekan SPACE untuk melanjutkan (resume)");
-      attroff(COLOR_PAIR(3)); // Nonaktifkan warna kuning-
-    }
-    else // Pesan game over
-    {
-      attron(COLOR_PAIR(1)); // Aktifkan warna merah
-      mvaddstr(game->screen_height / 2 - 1,
-               game->screen_width - 10,
-               "        Game Over        ");
-      attroff(COLOR_PAIR(1)); // Nonaktifkan warna merah
-      attron(COLOR_PAIR(3));  // Aktifkan warna kuning
-      mvaddstr(game->screen_height / 2,
-               game->screen_width - 10,
-               "Tekan SPACE untuk restart");
-      attroff(COLOR_PAIR(3)); // Nonaktifkan warna kuning
-    }
+    attron(COLOR_PAIR(3)); // Aktifkan warna kuning
+    mvaddstr(game->screen_height / 2 - 1,
+             game->screen_width - 10,
+             "         Paused         ");
+    mvaddstr(game->screen_height / 2,
+             game->screen_width - 17,
+             " Tekan SPACE untuk melanjutkan (resume) ");
   }
+  else // Pesan game over
+  {
+    attron(COLOR_PAIR(1)); // Aktifkan warna merah
+    mvaddstr(game->screen_height / 2 - 1,
+             game->screen_width - 10,
+             "        Game Over        ");
+    attroff(COLOR_PAIR(1)); // Nonaktifkan warna merah
+    attron(COLOR_PAIR(3));  // Aktifkan warna kuning
+    mvaddstr(game->screen_height / 2,
+             game->screen_width - 11,
+             " Tekan SPACE untuk restart ");
+  }
+
   attron(COLOR_PAIR(3)); // Aktifkan warna kuning
   mvaddstr(game->screen_height / 2 + 1,
-           game->screen_width - 14,
-           "Tekan ENTER untuk kembali ke menu");
+           game->screen_width - 15,
+           " Tekan ENTER untuk kembali ke menu ");
   mvaddstr(game->screen_height / 2 + 2,
-           game->screen_width - 8,
-           "Tekan ESC untuk keluar");
+           game->screen_width - 9,
+           " Tekan ESC untuk keluar ");
   attroff(COLOR_PAIR(3)); // Nonaktifkan warna kuning
+
+  do
+  {
+    switch (getch()) // Mendapatkan input
+    {
+    case ' ':                // spasi
+      if (!game->is_running) // restart game ketika game over
+        game_restart(game, game_data);
+      else if (game->is_pause) // resume game ketika pause
+        game->is_pause = false;
+      return;
+    case '\n': // enter untuk ke menu
+    case '\r':
+      show_menu(game_data);
+      game_restart(game, game_data); // restart game setelah dari menu (jika tidak quit)
+      return;
+    case 27:       // ESC key
+      quit_game(); // quit game
+      return;
+    }
+  } while (true);
 }
 
 // Prosedur untuk menampilkan dan mengambil input nama player yang dapat hi-score baru
@@ -412,8 +430,9 @@ void get_hi_score_player_name(Game *game)
   mvgetnstr(game->screen_height / 2 + 1, // Ambil input nama pemain
             game->screen_width - 8,      //
             buffer, sizeof(buffer) - 1); //
-  attroff(COLOR_PAIR(2));                // Nonaktifkan warna hijau
   noecho();                              // Nonaktifkan echo setelah input
+
+  attroff(COLOR_PAIR(2)); // Nonaktifkan warna hijau
 
   // Simpan nama pemain ke player name current score
   strcpy(game->current_score.player_name, buffer);
@@ -422,41 +441,33 @@ void get_hi_score_player_name(Game *game)
 
 // Prosedur untuk menangani input dari pengguna selama dalam permainan
 // game: parameter input/output passing by reference, menunjuk ke objek Game yang akan diperbarui berdasarkan input
-// game_data: parameter input/output passing by reference, menunjuk ke objek GameData yang menyimpan data permainan
-void ui_handle_input(Game *game, GameData *game_data)
+void ui_handle_input(Game *game)
 {
   switch (getch()) // Mendapatkan input
   {
+  case 'a':
+  case 'A':
   case KEY_LEFT:
     game_handle_input(game, vector2_create(-1, 0)); // Arahkan ular ke kiri
     break;
+  case 'd':
+  case 'D':
   case KEY_RIGHT:
     game_handle_input(game, vector2_create(1, 0)); // Arahkan ular ke kanan
     break;
+  case 'w':
+  case 'W':
   case KEY_UP:
     game_handle_input(game, vector2_create(0, -1)); // Arahkan ular ke atas
     break;
+  case 's':
+  case 'S':
   case KEY_DOWN:
     game_handle_input(game, vector2_create(0, 1)); // Arahkan ular ke bawah
     break;
   case ' ':                // spasi
-    if (!game->is_running) // restart game ketika game over
-      game_restart(game, game_data);
-    else if (game->is_pause) // resume game ketika pause
-      game->is_pause = false;
-    break;
-  case '\n': // enter untuk ke menu
-    if (!game->is_running || game->is_pause)
-    {
-      show_menu(game_data);
-      game_restart(game, game_data); // restart game setelah dari menu (jika tidak quit)
-    }
-    break;
-  case 27:                                   // ESC key
-    if (!game->is_running || game->is_pause) // quit ketika game sedang tidak berjalan (game over atau pause)
-      quit_game();
-    else // pause ketika game sedang berjalan
-      game->is_pause = true;
+  case 27:                 // ESC key
+    game->is_pause = true; // pause ketika game sedang berjalan
   }
 }
 

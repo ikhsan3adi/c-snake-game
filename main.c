@@ -43,36 +43,34 @@ int main(int argc, char *argv[])
   while (game.is_running)
   {
     // Tangani input
-    ui_handle_input(&game, NULL);
+    ui_handle_input(&game);
 
-    // Perbarui logika permainan, update Game state
-    game_update(&game);
+    if (!game.is_pause && game.is_running)
+    {
+      // Perbarui logika permainan, update Game state
+      game_update(&game);
 
-    // Render tampilan berdasarkan state game
-    render_ui(&game);
+      // Render tampilan berdasarkan state game
+      render_ui(&game);
+
+      // Tunda untuk mengontrol kecepatan permainan
+      usleep(game_data.settings.speed);
+    }
 
     // Tampilkan tampilan game over/pause jika tidak sedang berjalan
-    if (!game.is_running || game.is_pause)
+    if (game.is_pause || !game.is_running)
     {
       // Cek apakah skor saat ini melebihi hi-score (kecuali pause)
-      if (game.current_score.score > game.hi_score.score && !game.is_pause)
+      if (!game.is_pause && game.current_score.score > game.hi_score.score)
       {
         get_hi_score_player_name(&game);                          // ambil dan assign nama pemain ke game score
         set_game_hi_score(&game, &game_data, game.current_score); // perbarui hi-score
+
+        save_game_data(GAME_DATA_FILE, &game_data); // simpan data game terbaru
       }
 
-      // simpan data game terbaru
-      save_game_data(GAME_DATA_FILE, &game_data);
-
-      show_game_over_ui(&game);                 // Tampilkan UI game over
-      while (!game.is_running || game.is_pause) // Menunggu input
-      {
-        ui_handle_input(&game, &game_data);
-      }
+      show_game_over_ui(&game, &game_data); // Tampilkan UI game over
     }
-
-    // Tunda untuk mengontrol kecepatan permainan
-    usleep(game_data.settings.speed);
   }
 
   quit_game();

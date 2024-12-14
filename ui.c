@@ -342,9 +342,6 @@ void show_in_game_level(Game *game)
 // Menampilkan pesan game over atau kemenangan, serta instruksi untuk memulai ulang permainan.
 void show_game_over_ui(Game *game, GameData *game_data)
 {
-  // buat border
-  draw_border(0, 0, game->screen_width, game->screen_height);
-
   // Jika menang, tampilkan pesan kemenangan
   if (game->is_winning)
   {
@@ -439,7 +436,9 @@ void get_hi_score_player_name(Game *game)
 
   // Simpan nama pemain ke player name current score
   strcpy(game->current_score.player_name, buffer);
-  erase(); // bersihkan layar
+
+  // Render ulang UI setelah input nama pemain agar tampilan tetap konsisten
+  render_ui(game);
 }
 
 // Prosedur untuk menangani input dari pengguna selama dalam permainan

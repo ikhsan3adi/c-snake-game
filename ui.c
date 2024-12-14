@@ -342,6 +342,9 @@ void show_in_game_level(Game *game)
 // Menampilkan pesan game over atau kemenangan, serta instruksi untuk memulai ulang permainan.
 void show_game_over_ui(Game *game, GameData *game_data)
 {
+  // buat border
+  draw_border(0, 0, game->screen_width, game->screen_height);
+
   // Jika menang, tampilkan pesan kemenangan
   if (game->is_winning)
   {

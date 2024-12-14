@@ -6,6 +6,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include <time.h>
 #include <curses.h>
 #include "ui.h"
@@ -426,16 +427,56 @@ void get_hi_score_player_name(Game *game)
            game->screen_width - 10,
            "  Masukkan nama anda : ");
 
-  echo();                                // Aktifkan echo untuk menampilkan input
-  mvgetnstr(game->screen_height / 2 + 1, // Ambil input nama pemain
-            game->screen_width - 8,      //
-            buffer, sizeof(buffer) - 1); //
-  noecho();                              // Nonaktifkan echo setelah input
+  // buffer untuk nama
+  char player_name[20];
+
+  // Pastikan mode input benar
+  echo();      // Aktifkan echo untuk menampilkan input
+  curs_set(1); // Tampilkan kursor
+
+  // Input nama
+  int ch;        // karakter yang diinput
+  int index = 0; // index karakter yang diinput
+
+  // Ambil input nama pemain secara manual
+  while ((ch = getch()) != '\n' && ch != '\r') // Berhenti ketika menekan ENTER
+  {
+    if (ch == KEY_BACKSPACE || ch == 127 || ch == 8) // Menangani BACKSPACE, hapus karakter
+    {
+      if (index > 0)
+      {
+        index--;
+        player_name[index] = '\0'; // hapus karakter di index sebelumnya
+
+        // Hapus karakter di layar (timpa dengan spasi)
+        mvaddch(game->screen_height / 2 + 1, game->screen_width - 8 + index, ' ');
+      }
+    }
+    else if (isprint(ch) && index < sizeof(player_name) - 1) // Cek apakah karakter valid dan tidak melebihi batas
+    {
+      // Tambahkan karakter yang valid
+      player_name[index++] = ch;
+    }
+    // Tampilkan nama pemain yang telah diinput
+    mvaddstr(game->screen_height / 2 + 1,
+             game->screen_width - 8,
+             player_name);
+  }
+
+  // beri string null di akhir
+  player_name[index] = '\0';
+
+  // Kembalikan mode tampilan
+  curs_set(0); // Sembunyikan kursor
+  noecho();    // Nonaktifkan echo setelah input
+
+  if (strlen(player_name) > 0) // Simpan nama pemain ke player name current score
+    strcpy(game->current_score.player_name, player_name);
+  else // Nama default jika tidak diinput
+    strcpy(game->current_score.player_name, "Unknown");
 
   attroff(COLOR_PAIR(2)); // Nonaktifkan warna hijau
-
-  // Simpan nama pemain ke player name current score
-  strcpy(game->current_score.player_name, buffer);
+  erase();                // bersihkan layar
 
   // Render ulang UI setelah input nama pemain agar tampilan tetap konsisten
   render_ui(game);

@@ -69,7 +69,10 @@ void show_menu(GameData *game_data)
     show_title(); // Tampilkan judul
 
     // tampilkan hi-score saat ini
-    mvprintw(9, 54, "Hi-Score: %d | %s", game_data->hi_score.score, game_data->hi_score.player_name);
+    mvprintw(9, 60 - strlen(game_data->hi_score.player_name),
+             "Hi-Score: %d | %s",
+             game_data->hi_score.score,
+             game_data->hi_score.player_name);
 
     attron(COLOR_PAIR(3)); // beri warna kuning
     mvprintw(9, 10, "=== Menu ===");
@@ -160,11 +163,11 @@ void show_game_level_menu(GameData *game_data)
 void show_copyright()
 {
   attron(COLOR_PAIR(4)); // beri warna biru
-  mvprintw(25, 10, "By Kelompok 9:");
-  mvprintw(26, 10, "Ikhsan Satriadi");
-  mvprintw(26, 35, "241511080");
-  mvprintw(27, 10, "Rizky Satria Gunawan");
-  mvprintw(27, 35, "241511089");
+  mvprintw(20, 10, "By Kelompok 9:");
+  mvprintw(21, 10, "Ikhsan Satriadi");
+  mvprintw(21, 35, "241511080");
+  mvprintw(22, 10, "Rizky Satria Gunawan");
+  mvprintw(22, 35, "241511089");
   attroff(COLOR_PAIR(4)); // hapus warna biru
 }
 

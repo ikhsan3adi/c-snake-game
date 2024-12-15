@@ -190,8 +190,9 @@ void show_leaderboard(GameData *game_data)
   attroff(COLOR_PAIR(2)); // matikan warna hijau
 
   // Tampilkan daftar skor tertinggi
-  for (size_t i = 0; i < MAX_LEADERBOARD_SIZE; i++)
+  for (int i = 0; i < MAX_LEADERBOARD_SIZE; i++)
   {
+    // Tampilkan `-` jika nilai kosong
     if (game_data->leaderboard[i].score == 0 || game_data->leaderboard[i].level == 0)
     {
       mvprintw(i + 12, 10, "%d.\t-\t\t-\t-", i + 1);

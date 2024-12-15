@@ -77,7 +77,7 @@ void show_menu(GameData *game_data)
     mvprintw(12, 10, "2. Atur Level (Level: %d)", game_data->settings.level); // menampilkan level saat ini
     mvprintw(13, 10, "3. Leaderboard");
     mvprintw(14, 10, "4. Keluar");
-    mvprintw(16, 10, "Pilih opsi (1-3): ");
+    mvprintw(16, 10, "Pilih opsi (1-4): ");
     attroff(COLOR_PAIR(3)); // hapus warna kuning
 
     show_copyright(); // Tampilkan copyright

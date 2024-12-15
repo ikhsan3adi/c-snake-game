@@ -28,10 +28,12 @@ Game game_create(int screen_width, int screen_height, GameData *game_data)
 
   // Atur status awal
   new_game.current_score.score = 0;
+  new_game.current_score.level = game_data->settings.level;
   new_game.hi_score = game_data->hi_score; // ambil dari game data
   new_game.settings = game_data->settings; // ambil dari game data
   new_game.is_running = true;
   new_game.is_pause = false;
+  new_game.is_winning = false;
 
   return new_game;
 }

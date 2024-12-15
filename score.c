@@ -10,14 +10,17 @@
 // Fungsi untuk membuat objek score
 // score: parameter input passing by value, tipe integer
 // player_name: parameter input passing by value, tipe string, nama pemain
+// level: parameter input passing by value, tipe integer, tingkat permainan
 // Mengembalikan objek Score
-Score create_score(int score, char *player_name)
+Score create_score(int score, char *player_name, int level)
 {
   // Kamus
   Score new_score; // Deklarasi objek Score baru
 
+  // Assign nilai atribut objek Score
   strcpy(new_score.player_name, player_name); // salin player_name ke new_score.player_name
-  new_score.score = score;                    // assign score ke new_score.score
+  new_score.score = score;
+  new_score.level = level;
 
   return new_score;
 }

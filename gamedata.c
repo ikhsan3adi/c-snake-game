@@ -40,6 +40,7 @@ GameData load_game_data(const char *filename)
     // Jika file tidak ada, set nilai default
     strcpy(game_data.hi_score.player_name, "Unknown");
     game_data.hi_score.score = 0;
+    game_data.hi_score.level = 2;
     game_data.settings.level = 2;
     game_data.settings.speed = SPEED_2;
   }

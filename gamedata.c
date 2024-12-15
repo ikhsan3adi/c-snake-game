@@ -43,6 +43,14 @@ GameData load_game_data(const char *filename)
     game_data.hi_score.level = 2;
     game_data.settings.level = 2;
     game_data.settings.speed = SPEED_2;
+
+    // Inisialisasi leaderboard dengan nilai default
+    for (int i = 0; i < MAX_LEADERBOARD_SIZE; i++)
+    {
+      strcpy(game_data.leaderboard[i].player_name, "Unknown");
+      game_data.leaderboard[i].score = 0;
+      game_data.leaderboard[i].level = 0;
+    }
   }
   return game_data;
 }

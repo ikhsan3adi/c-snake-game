@@ -19,6 +19,7 @@ int main(int argc, char *argv[])
   // Kamus data
   GameData game_data; // variabel untuk menyimpan data permainan
   Game game;          // variabel untuk menyimpan state permainan
+  int rank_index;     // variabel untuk menyimpan index rank leaderboard dari skor saat ini
 
   // Inisialisasi dimensi layar
   int screen_width = SCREEN_WIDTH;
@@ -60,13 +61,21 @@ int main(int argc, char *argv[])
     // Tampilkan tampilan game over/pause jika tidak sedang berjalan
     if (game.is_pause || !game.is_running)
     {
-      // Cek apakah skor saat ini melebihi hi-score (kecuali pause)
-      if (!game.is_pause && game.current_score.score > game.hi_score.score)
+      if (!game.is_pause)
       {
-        get_hi_score_player_name(&game);                          // ambil dan assign nama pemain ke game score
-        set_game_hi_score(&game, &game_data, game.current_score); // perbarui hi-score
+        // Dapatkan indeks peringkat leaderboard berdasarkan skor saat ini
+        rank_index = in_leaderboard(&game_data, game.current_score);
+      }
+
+      // Cek apakah skor saat ini masuk ke leaderboard (kecuali pause)
+      if (!game.is_pause && rank_index != -1)
+      {
+        get_hi_score_player_name(&game, rank_index + 1);                       // ambil dan assign nama pemain ke game score
+        update_leaderboard(&game, &game_data, game.current_score, rank_index); // Perbarui leaderboard
 
         save_game_data(GAME_DATA_FILE, &game_data); // simpan data game terbaru
+
+        rank_index = -1; // reset rank index
       }
 
       show_game_over_ui(&game, &game_data); // Tampilkan UI game over

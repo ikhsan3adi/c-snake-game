@@ -95,7 +95,7 @@ void show_menu(GameData *game_data)
       break;
     case '3':
       // Panggil prosedur untuk melihat leaderboard
-      // show_leaderboard();
+      show_leaderboard(game_data);
       break;
     case '4':      // 4 untuk keluar
     case 27:       // ESC untuk keluar
@@ -155,6 +155,66 @@ void show_game_level_menu(GameData *game_data)
     case '6': // kembali
       return;
     }
+  } while (true);
+}
+
+/**
+ * Menampilkan leaderboard yang berisi skor tertinggi.
+ *
+ * Prosedur ini menampilkan daftar skor tertinggi dari permainan
+ * dan menunggu input dari pengguna untuk kembali ke menu.
+ *
+ * @param game_data Pointer ke objek GameData yang menyimpan informasi
+ *                  tentang leaderboard dan skor pemain.
+ */
+void show_leaderboard(GameData *game_data)
+{
+  // Kamus data
+  int ch; // variabel untuk menyimpan input pengguna
+
+  erase(); // Bersihkan tampilan sebeblumnya
+
+  show_title(); // Tampilkan judul game
+
+  attron(COLOR_PAIR(3)); // beri warna kuning
+  mvprintw(9, 10, "=== Leaderboard ===");
+  attroff(COLOR_PAIR(3)); // matikan warna kuning
+
+  // header tabel
+  attron(COLOR_PAIR(2)); // beri warna hijau
+  mvprintw(11, 10, "No.\tNama Player\tLevel\tScore");
+  attroff(COLOR_PAIR(2)); // matikan warna hijau
+
+  // Tampilkan daftar skor tertinggi
+  for (size_t i = 0; i < MAX_LEADERBOARD_SIZE; i++)
+  {
+    if (game_data->leaderboard[i].score == 0 || game_data->leaderboard[i].level == 0)
+    {
+      mvprintw(i + 12, 10, "%d.\t-\t\t-\t-", i + 1);
+      continue;
+    }
+
+    if (i == 0)
+      attron(COLOR_PAIR(3)); // beri warna kuning untuk peringkat 1
+
+    mvprintw(i + 12, 10, "%d.\t%-15s %d\t%d", i + 1,
+             game_data->leaderboard[i].player_name,
+             game_data->leaderboard[i].level,
+             game_data->leaderboard[i].score);
+
+    if (i == 0)
+      attroff(COLOR_PAIR(3)); // matikan warna kuning
+  }
+
+  mvprintw(13 + MAX_LEADERBOARD_SIZE, 10, "[ENTER/SPACE/ESC]: Kembali");
+
+  do
+  {
+    ch = getch(); // Ambil input dari pengguna
+
+    // Tunggu input dari pengguna untuk kembali
+    if (ch == ' ' || ch == '\n' || ch == '\r' || ch == 27) // kembali
+      return;
   } while (true);
 }
 
@@ -418,28 +478,43 @@ void show_game_over_ui(Game *game, GameData *game_data)
 
 // Prosedur untuk menampilkan dan mengambil input nama player yang dapat hi-score baru
 // game: parameter input/output passing by reference, menunjuk ke objek Game yang akan diperbarui berdasarkan input
-void get_hi_score_player_name(Game *game)
+// rank: parameter input, peringkat pemain yang baru, didapatkan dari rank_index + 1
+void get_hi_score_player_name(Game *game, int rank)
 {
-  attron(COLOR_PAIR(2)); // Menggunakan warna hijau
+  attron(COLOR_PAIR(4)); // Menggunakan warna biru
 
+  // Tampilkan pesan peringkat di atas prompt
+  mvprintw(game->screen_height / 2 - 2,
+           game->screen_width - 7,
+           "PERINGKAT ANDA: %d", rank);
+
+  if (rank == 1)
+  {
+    mvaddstr(game->screen_height / 2 - 1,
+             game->screen_width - 10,
+             "  Skor Tertinggi Baru!  ");
+  }
+  else
+  {
+    mvaddstr(game->screen_height / 2 - 1,
+             game->screen_width - 18,
+             "  Skor Anda Masuk 10 Peringkat Teratas! ");
+  }
+  attroff(COLOR_PAIR(4)); // disable warna biru
+
+  attron(COLOR_PAIR(2)); // Menggunakan warna hijau
   // Tampilkan prompt
-  mvaddstr(game->screen_height / 2 - 1,
-           game->screen_width - 10,
-           "  Skor Tertinggi Baru!  ");
   mvaddstr(game->screen_height / 2,
            game->screen_width - 10,
            "  Masukkan nama anda : ");
 
   // buffer untuk nama
-  char player_name[20];
+  char player_name[16] = {0}; // maks 16 karakter
+  int ch;                     // karakter yang diinput
+  int index = 0;              // index karakter yang diinput
 
   // Pastikan mode input benar
-  echo();      // Aktifkan echo untuk menampilkan input
   curs_set(1); // Tampilkan kursor
-
-  // Input nama
-  int ch;        // karakter yang diinput
-  int index = 0; // index karakter yang diinput
 
   // Ambil input nama pemain secara manual
   while ((ch = getch()) != '\n' && ch != '\r') // Berhenti ketika menekan ENTER
@@ -466,18 +541,14 @@ void get_hi_score_player_name(Game *game)
              player_name);
   }
 
-  // beri string null di akhir
-  player_name[index] = '\0';
-
-  // Kembalikan mode tampilan
-  curs_set(0); // Sembunyikan kursor
-  noecho();    // Nonaktifkan echo setelah input
+  player_name[index] = '\0'; // akhiri string dengan null character
 
   if (strlen(player_name) > 0) // Simpan nama pemain ke player name current score
     strcpy(game->current_score.player_name, player_name);
   else // Nama default jika tidak diinput
     strcpy(game->current_score.player_name, "Unknown");
 
+  curs_set(0);            // Sembunyikan kursor
   attroff(COLOR_PAIR(2)); // Nonaktifkan warna hijau
   erase();                // bersihkan layar
 

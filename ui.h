@@ -24,6 +24,17 @@ void show_menu(GameData *game_data);
 // game_data: parameter input/output passing by reference, menunjuk ke objek GameData yang menyimpan data permainan
 void show_game_level_menu(GameData *game_data);
 
+/**
+ * Menampilkan leaderboard yang berisi skor tertinggi.
+ *
+ * Prosedur ini menampilkan daftar skor tertinggi dari permainan
+ * dan menunggu input dari pengguna untuk kembali ke menu.
+ *
+ * @param game_data Pointer ke objek GameData yang menyimpan informasi
+ *                  tentang leaderboard dan skor pemain.
+ */
+void show_leaderboard(GameData *game_data);
+
 // Prosedur untuk menampilkan nama pembuat dan kelompok
 void show_copyright();
 
@@ -72,7 +83,8 @@ void show_game_over_ui(Game *game, GameData *game_data);
 
 // Prosedur untuk menampilkan dan mengambil input nama player yang dapat hi-score baru
 // game: parameter input/output passing by reference, menunjuk ke objek Game yang akan diperbarui berdasarkan input
-void get_hi_score_player_name(Game *game);
+// rank: parameter input, peringkat pemain yang baru, didapatkan dari rank_index + 1
+void get_hi_score_player_name(Game *game, int rank);
 
 // Prosedur untuk menangani input dari pengguna selama dalam permainan
 // game: parameter input/output passing by reference, menunjuk ke objek Game yang akan diperbarui berdasarkan input

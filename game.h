@@ -41,6 +41,19 @@ Game game_create(int screen_width, int screen_height, GameData *game_data);
 // current_score: parameter input passing by value, tipe Score
 void set_game_hi_score(Game *game, GameData *game_data, Score current_score);
 
+// Prosedur untuk memperbarui leaderboard
+// game: parameter output passing by reference, tipe Game*, menunjuk ke objek permainan yang akan diperbarui
+// game_data: parameter output passing by reference, tipe GameData*, menunjuk ke objek data permainan yang akan diperbarui
+// current_score: parameter input passing by value, tipe Score
+// rank_index: parameter input passing by value, tipe int, lokasi index di leaderboard untuk skor baru
+void update_leaderboard(Game *game, GameData *game_data, Score current_score, int rank_index);
+
+// Fungsi untuk mengecek apakah skor dapat masuk ke leaderboard
+// game_data: parameter output passing by reference, tipe GameData*, menunjuk ke objek data permainan
+// current_score: parameter input passing by value, tipe Score, skor saat ini
+// Mengembalikan peringkat baru di leaderboard, -1 jika tidak masuk leaderboard
+int in_leaderboard(GameData *game_data, Score current_score);
+
 // Prosedur untuk memperbarui logika permainan
 // game: parameter input/output passing by reference, tipe Game*, menunjuk ke objek permainan yang akan diperbarui
 void game_update(Game *game);

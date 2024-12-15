@@ -11,11 +11,14 @@
 #include "score.h"
 #include "settings.h"
 
+#define MAX_LEADERBOARD_SIZE 10
+
 // struct untuk menyimpan data permainan
 typedef struct
 {
-  Score hi_score;    // Data skor tertinggi
-  Settings settings; // Data pengaturan
+  Score hi_score;                          // Data skor tertinggi
+  Score leaderboard[MAX_LEADERBOARD_SIZE]; // Data leaderboard permainan
+  Settings settings;                       // Data pengaturan
 } GameData;
 
 // Prosedur untuk menyimpan data permainan ke file biner

@@ -11,8 +11,9 @@
 // score: parameter input passing by value, tipe integer
 // player_name: parameter input passing by value, tipe string, nama pemain
 // level: parameter input passing by value, tipe integer, tingkat permainan
+// date: parameter input passing by value, tipe DateTime, tanggal skor dicapai
 // Mengembalikan objek Score
-Score create_score(int score, char *player_name, int level)
+Score create_score(int score, char *player_name, int level, DateTime date)
 {
   // Kamus
   Score new_score; // Deklarasi objek Score baru
@@ -21,6 +22,7 @@ Score create_score(int score, char *player_name, int level)
   strcpy(new_score.player_name, player_name); // salin player_name ke new_score.player_name
   new_score.score = score;
   new_score.level = level;
+  new_score.date = date;
 
   return new_score;
 }

@@ -50,6 +50,7 @@ GameData load_game_data(const char *filename)
       strcpy(game_data.leaderboard[i].player_name, "Unknown");
       game_data.leaderboard[i].score = 0;
       game_data.leaderboard[i].level = 0;
+      game_data.leaderboard[i].date = create_date(1900, 1, 1, 0, 0, 0);
     }
   }
   return game_data;

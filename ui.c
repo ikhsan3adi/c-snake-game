@@ -195,17 +195,21 @@ void show_leaderboard(GameData *game_data)
     // Tampilkan `-` jika nilai kosong
     if (game_data->leaderboard[i].score == 0 || game_data->leaderboard[i].level == 0)
     {
-      mvprintw(i + 12, 10, "%d.\t-\t\t-\t-", i + 1);
+      mvprintw(i + 12, 10, "%d.\t-\t\t-\t-\t-", i + 1);
       continue;
     }
 
     if (i == 0)
       attron(COLOR_PAIR(3)); // beri warna kuning untuk peringkat 1
 
-    mvprintw(i + 12, 10, "%d.\t%-15s %d\t%d", i + 1,
+    // Menggunakan date_to_string untuk mendapatkan string tanggal
+    char *date_str = date_to_string(game_data->leaderboard[i].date);
+    mvprintw(i + 12, 10, "%d.\t%-15s %d\t%d\t%-20s", i + 1,
              game_data->leaderboard[i].player_name,
              game_data->leaderboard[i].level,
-             game_data->leaderboard[i].score);
+             game_data->leaderboard[i].score,
+             date_str);
+    free(date_str);
 
     if (i == 0)
       attroff(COLOR_PAIR(3)); // matikan warna kuning

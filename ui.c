@@ -487,23 +487,18 @@ void get_hi_score_player_name(Game *game, int rank)
 {
   attron(COLOR_PAIR(4)); // Menggunakan warna biru
 
-  // Tampilkan pesan peringkat di atas prompt
-  mvprintw(game->screen_height / 2 - 2,
-           game->screen_width - 7,
-           "PERINGKAT ANDA: %d", rank);
-
   if (rank == 1)
   {
-    mvaddstr(game->screen_height / 2 - 1,
+    mvaddstr(game->screen_height / 2 - 2,
              game->screen_width - 10,
              "  Skor Tertinggi Baru!  ");
   }
-  else
-  {
-    mvaddstr(game->screen_height / 2 - 1,
-             game->screen_width - 18,
-             "  Skor Anda Masuk 10 Peringkat Teratas! ");
-  }
+
+  // Tampilkan pesan peringkat di atas prompt
+  mvprintw(game->screen_height / 2 - 1,
+           game->screen_width - 7,
+           "PERINGKAT ANDA: %d", rank);
+
   attroff(COLOR_PAIR(4)); // disable warna biru
 
   attron(COLOR_PAIR(2)); // Menggunakan warna hijau

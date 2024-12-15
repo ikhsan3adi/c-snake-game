@@ -50,11 +50,12 @@ DateTime get_current_date();
 // Fungsi untuk mendapatkan nama bulan singkat (Jan, Feb, Mar, ..., Des)
 // date: parameter input bertipe DateTime
 // Mengembalikan array char
-char *get_month_name(DateTime date);
+char *get_short_month_name(DateTime date);
 
-// Fungsi untuk membuat string tanggal dan waktu
+// Prosedur untuk mendapatkan string tanggal dan waktu dengan
+// "DD MMM YYYY HH:MM:SS" cth. "16 Nov 2024 15:00:00"
+// date_str: parameter output passing by reference bertipe char* (array karakter)
 // date: parameter input bertipe DateTime
-// Mengembalikan string
-char *date_to_string(DateTime date);
+void date_to_string(char *date_str, DateTime date);
 
 #endif // DATE_H

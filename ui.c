@@ -174,7 +174,8 @@ void show_game_level_menu(GameData *game_data)
 void show_leaderboard(GameData *game_data)
 {
   // Kamus data
-  int ch; // variabel untuk menyimpan input pengguna
+  int ch;                  // variabel untuk menyimpan input pengguna
+  char date_str[20] = {0}; // variabel string untuk menyimpan tanggal
 
   erase(); // Bersihkan tampilan sebeblumnya
 
@@ -203,7 +204,7 @@ void show_leaderboard(GameData *game_data)
       attron(COLOR_PAIR(3)); // beri warna kuning untuk peringkat 1
 
     // Menggunakan date_to_string untuk mendapatkan string tanggal
-    char *date_str = date_to_string(game_data->leaderboard[i].date);
+    date_to_string(date_str, game_data->leaderboard[i].date);
 
     // Tampilkan informasi leaderboard: peringkat, nama pemain, level, skor, dan tanggal
     mvprintw(i + 12, 10, "%d.\t%-15s %d\t%d\t%-20s", i + 1,
@@ -211,8 +212,6 @@ void show_leaderboard(GameData *game_data)
              game_data->leaderboard[i].level,
              game_data->leaderboard[i].score,
              date_str);
-
-    free(date_str); // Hapus alokasi string tanggal
 
     if (i == 0)
       attroff(COLOR_PAIR(3)); // matikan warna kuning

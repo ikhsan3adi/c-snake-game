@@ -5,12 +5,13 @@
 
 #include "date.h"
 #include <time.h>
-#include <stdlib.h>
 #include <stdio.h>
 
 // Variabel/konstanta global
 // Array untuk menyimpan nama bulan singkat
-static char *month_names[12] = {"Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Des"};
+static char *month_names[12] = {"Jan", "Feb", "Mar", "Apr",
+                                "Mei", "Jun", "Jul", "Aug",
+                                "Sep", "Okt", "Nov", "Des"};
 
 // Fungsi untuk membuat tanggal dan waktu
 // Parameter : year, month, day, hour, minutes, second, bertipe integer
@@ -107,28 +108,24 @@ DateTime get_current_date()
 // Fungsi untuk mendapatkan nama bulan singkat (Jan, Feb, Mar, ..., Des)
 // Parameter : date, bertipe DateTime
 // Mengembalikan array char
-char *get_month_name(DateTime date)
+char *get_short_month_name(DateTime date)
 {
-  // Kembalikan nama bulan sesuai dengan parameter month
+  // Kembalikan nama bulan sesuai dengan index date.month - 1
   return month_names[date.month - 1];
 }
 
-// Fungsi untuk membuat string tanggal dan waktu
-// Parameter : date, bertipe DateTime
-// Mengembalikan string
-char *date_to_string(DateTime date)
+// Prosedur untuk mendapatkan string tanggal dan waktu dengan
+// "DD MMM YYYY HH:MM:SS" cth. "16 Nov 2024 15:00:00"
+// date_str: parameter output passing by reference bertipe char* (array karakter)
+// date: parameter input bertipe DateTime
+void date_to_string(char *date_str, DateTime date)
 {
-  // Kamus data
-  char *date_string; // deklarasi variabel bertipe array char
-
-  // Konversi ke string
-  date_string = malloc(21 * sizeof(char)); // alokasikan memori untuk menyimpan
-
-  if (date_string == NULL)
-    return "-"; // Penanganan kesalahan jika malloc gagal
-
-  sprintf(date_string, "%02d %s %04d %02d:%02d:%02d", // format tanggal dan waktu
-          date.day, get_month_name(date), date.year, date.hour, date.minute, date.second);
-
-  return date_string;
+  sprintf(date_str,
+          "%02d %s %04d %02d:%02d:%02d", // format tanggal dan waktu "DD MMM YYYY HH:MM:SS"
+          date.day,
+          get_short_month_name(date), // nama bulan singkat
+          date.year,
+          date.hour,
+          date.minute,
+          date.second);
 }

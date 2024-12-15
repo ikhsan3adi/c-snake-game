@@ -152,6 +152,10 @@ void show_game_level_menu(GameData *game_data)
     case '5':
       update_settings(&game_data->settings, 5, SPEED_5); // Level 5
       return;
+    case ' ':
+    case '\n':
+    case '\r':
+    case 27:
     case '6': // kembali
       return;
     }

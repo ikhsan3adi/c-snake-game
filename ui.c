@@ -186,7 +186,7 @@ void show_leaderboard(GameData *game_data)
 
   // header tabel
   attron(COLOR_PAIR(2)); // beri warna hijau
-  mvprintw(11, 10, "No.\tNama Player\tLevel\tScore");
+  mvprintw(11, 10, "Rank.\tNama Player\tLevel\tScore\tTanggal");
   attroff(COLOR_PAIR(2)); // matikan warna hijau
 
   // Tampilkan daftar skor tertinggi

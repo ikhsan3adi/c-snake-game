@@ -29,14 +29,6 @@ void initialize_ui()
   curs_set(0);           // Menyembunyikan kursor
   nodelay(stdscr, TRUE); // Mengatur input non-blocking, sehingga getch() tidak menunggu input
 
-  // cek apakah terminal mendukung warna
-  if (!has_colors())
-  {
-    endwin();                                            // Mengakhiri mode curses jika terminal tidak mendukung warna
-    fprintf(stderr, "Terminal tidak mendukung warna\n"); // Menampilkan pesan kesalahan
-    exit(1);                                             // Keluar dari program dengan status kesalahan
-  }
-
   // Inisialisasi warna
   start_color();
   init_pair(1, COLOR_RED, COLOR_BLACK);    // warna merah, background hitam = 1

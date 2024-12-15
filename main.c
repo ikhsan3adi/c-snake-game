@@ -10,8 +10,8 @@
 #include "gamedata.h"
 #include "ui.h"
 
-#define SCREEN_WIDTH 50           // lebar default area permainan
-#define SCREEN_HEIGHT 30          // tinggi default area permainan
+#define SCREEN_WIDTH 40           // lebar default area permainan
+#define SCREEN_HEIGHT 20          // tinggi default area permainan
 #define GAME_DATA_FILE "data.dat" // nama file tempat menyimpan data permainan
 
 int main(int argc, char *argv[])

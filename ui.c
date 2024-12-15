@@ -504,7 +504,7 @@ void get_hi_score_player_name(Game *game, int rank)
   // Tampilkan prompt
   mvaddstr(game->screen_height / 2,
            game->screen_width - 10,
-           "  Masukkan nama anda : ");
+           "  Masukkan nama anda: ");
 
   // buffer untuk nama
   char player_name[16] = {0}; // maks 16 karakter
@@ -525,7 +525,7 @@ void get_hi_score_player_name(Game *game, int rank)
         player_name[index] = '\0'; // hapus karakter di index sebelumnya
 
         // Hapus karakter di layar (timpa dengan spasi)
-        mvaddch(game->screen_height / 2 + 1, game->screen_width - 8 + index, ' ');
+        mvaddch(game->screen_height / 2 + 1, game->screen_width - 6 + index, ' ');
       }
     }
     else if (isprint(ch) && index < sizeof(player_name) - 1) // Cek apakah karakter valid dan tidak melebihi batas
@@ -535,7 +535,7 @@ void get_hi_score_player_name(Game *game, int rank)
     }
     // Tampilkan nama pemain yang telah diinput
     mvaddstr(game->screen_height / 2 + 1,
-             game->screen_width - 8,
+             game->screen_width - 6,
              player_name);
   }
 

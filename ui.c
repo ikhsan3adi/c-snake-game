@@ -204,12 +204,15 @@ void show_leaderboard(GameData *game_data)
 
     // Menggunakan date_to_string untuk mendapatkan string tanggal
     char *date_str = date_to_string(game_data->leaderboard[i].date);
+
+    // Tampilkan informasi leaderboard: peringkat, nama pemain, level, skor, dan tanggal
     mvprintw(i + 12, 10, "%d.\t%-15s %d\t%d\t%-20s", i + 1,
              game_data->leaderboard[i].player_name,
              game_data->leaderboard[i].level,
              game_data->leaderboard[i].score,
              date_str);
-    free(date_str);
+
+    free(date_str); // Hapus alokasi string tanggal
 
     if (i == 0)
       attroff(COLOR_PAIR(3)); // matikan warna kuning

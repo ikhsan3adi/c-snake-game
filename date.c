@@ -1,7 +1,7 @@
 // Nama Program : date.c
 // Deskripsi    : Implementasi fungsi date untuk membuat tanggal dan waktu
-// Pembuat      : Ikhsan Satriadi / 241511080
-//                Rizky Satria Gunawan / 241511089
+// Pembuat      : Ikhsan Satriadi (241511080)
+//                Rizky Satria Gunawan (241511089)
 
 #include "date.h"
 #include <time.h>

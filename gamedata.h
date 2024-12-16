@@ -2,8 +2,8 @@
 // Deskripsi    : Header file untuk pengelolaan data permainan,
 //                mendefinisikan struktur GameData dan fungsi-fungsi untuk menyimpan,
 //                memuat, dan menghapus data permainan.
-// Pembuat      : Ikhsan Satriadi / 241511080
-//                Rizky Satria Gunawan / 241511089
+// Pembuat      : Ikhsan Satriadi (241511080)
+//                Rizky Satria Gunawan (241511089)
 
 #ifndef GAMEDATA_H
 #define GAMEDATA_H

@@ -1,8 +1,8 @@
 // Nama Program : ui.h
 // Deskripsi    : Definisi fungsi-fungsi antarmuka pengguna,
 //                bertujuan merancang tampilan dan mekanisme interaksi pengguna dengan permainan
-// Pembuat      : Ikhsan Satriadi / 241511080
-//                Rizky Satria Gunawan / 241511089
+// Pembuat      : Ikhsan Satriadi (241511080)
+//                Rizky Satria Gunawan (241511089)
 
 #ifndef UI_H
 #define UI_H

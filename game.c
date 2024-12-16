@@ -1,8 +1,8 @@
 // Nama Program : game.c
 // Deskripsi    : Implementasi logika utama permainan,
 //                bertujuan mengelola siklus dan aturan dasar permainan
-// Pembuat      : Ikhsan Satriadi / 241511080
-//                Rizky Satria Gunawan / 241511089
+// Pembuat      : Ikhsan Satriadi (241511080)
+//                Rizky Satria Gunawan (241511089)
 
 #include "game.h"
 
@@ -106,7 +106,7 @@ void game_update(Game *game)
     return;
   }
 
-  // Cek tabrakan dengan makanan
+  // Cek tabrakan dengan makanan. Ular memakan makanan
   if (vector2_equals(game->game_food.position, game->game_snake.head))
   {
     // Tambah panjang ular
@@ -122,14 +122,14 @@ void game_update(Game *game)
         &game->game_snake);
   }
 
-  // Gerakkan ular
+  // Perbarui segmen dan gerakkan ular
   snake_move(&game->game_snake);
 
-  //* Cek apakah skor sudah mencapai maksimal skor, jika iya maka game berhenti dan menang
+  // Cek apakah skor sudah mencapai maksimal skor, jika iya maka game berhenti dan menang
   if (game->current_score.score >= MAX_SNAKE_LENGTH)
   {
-    game->is_running = false;
-    game->is_winning = true; // menang!
+    game->is_running = false; // permainan berhenti
+    game->is_winning = true;  // menang
   }
 }
 

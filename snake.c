@@ -2,8 +2,8 @@
 // Deskripsi    : Implementasi logika pergerakan dan pertumbuhan ular,
 //                bertujuan mengendalikan pergerakan, pertumbuhan, dan interaksi ular dengan
 //                makanan dan tembok/batas layar
-// Pembuat      : Ikhsan Satriadi / 241511080
-//                Rizky Satria Gunawan / 241511089
+// Pembuat      : Ikhsan Satriadi (241511080)
+//                Rizky Satria Gunawan (241511089)
 
 #include "snake.h"
 

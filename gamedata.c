@@ -1,8 +1,8 @@
 // Nama Program : gamedata.c
 // Deskripsi    : Implementasi logika penyimpanan dan pemuatan data permainan,
 //                bertujuan untuk menyimpan dan memuat data permainan ke dan dari file biner.
-// Pembuat      : Ikhsan Satriadi / 241511080
-//                Rizky Satria Gunawan / 241511089
+// Pembuat      : Ikhsan Satriadi (241511080)
+//                Rizky Satria Gunawan (241511089)
 
 #include <stdio.h>
 #include <string.h>

@@ -1,8 +1,8 @@
 // Nama Program : score.c
 // Deskripsi    : Implementasi logika pengelolaan skor dalam permainan,
 //                bertujuan untuk membuat, menambah, dan menyimpan skor pemain.
-// Pembuat      : Ikhsan Satriadi / 241511080
-//                Rizky Satria Gunawan / 241511089
+// Pembuat      : Ikhsan Satriadi (241511080)
+//                Rizky Satria Gunawan (241511089)
 
 #include <string.h>
 #include "score.h"

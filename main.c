@@ -2,8 +2,8 @@
 // Deskripsi    : Program Permainan Snake
 //                Mengimplementasikan permainan klasik snake
 //                dengan kontrol menggunakan keyboard dan tampilan console
-// Pembuat      : Ikhsan Satriadi / 241511080
-//                Rizky Satria Gunawan / 241511089
+// Pembuat      : Ikhsan Satriadi (241511080)
+//                Rizky Satria Gunawan (241511089)
 
 #include <unistd.h>
 #include "game.h"

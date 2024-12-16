@@ -1,8 +1,8 @@
 // Nama Program : settings.c
 // Deskripsi    : Implementasi pengaturan permainan,
 //                bertujuan untuk memperbarui dan mengelola pengaturan permainan seperti level dan kecepatan.
-// Pembuat      : Ikhsan Satriadi / 241511080
-//                Rizky Satria Gunawan / 241511089
+// Pembuat      : Ikhsan Satriadi (241511080)
+//                Rizky Satria Gunawan (241511089)
 
 #include "settings.h"
 

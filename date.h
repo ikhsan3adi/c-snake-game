@@ -1,7 +1,7 @@
 // Nama Program : date.h
 // Deskripsi    : Deklarasi fungsi date untuk membuat tanggal dan waktu
-// Pembuat      : Ikhsan Satriadi / 241511080
-//                Rizky Satria Gunawan / 241511089
+// Pembuat      : Ikhsan Satriadi (241511080)
+//                Rizky Satria Gunawan (241511089)
 
 #ifndef DATE_H
 #define DATE_H

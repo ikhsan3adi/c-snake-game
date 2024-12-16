@@ -2,8 +2,8 @@
 // Deskripsi    : Header file untuk pengelolaan skor dalam permainan,
 //                mendefinisikan struktur Score dan fungsi-fungsi terkait untuk
 //                membuat dan mengelola skor pemain.
-// Pembuat      : Ikhsan Satriadi / 241511080
-//                Rizky Satria Gunawan / 241511089
+// Pembuat      : Ikhsan Satriadi (241511080)
+//                Rizky Satria Gunawan (241511089)
 
 #ifndef SCORE_H
 #define SCORE_H

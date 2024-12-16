@@ -37,10 +37,9 @@ void snake_move(Snake *snake);
 // Mengembalikan true jika ular bertabrakan dengan dirinya sendiri, false jika tidak
 bool snake_collides_with_self(Snake *snake);
 
-// Fungsi untuk menumbuhkan ular
-// snake: parameter input/output passing by reference, menunjuk ke objek ular yang akan diperbarui
-// Mengembalikan true jika ular berhasil tumbuh, false jika tidak (misalnya, jika sudah mencapai panjang maksimum)
-bool snake_grow(Snake *snake);
+// Prosedur untuk menumbuhkan ular
+// snake: parameter output passing by reference, menunjuk ke objek ular yang akan diperbarui
+void snake_grow(Snake *snake);
 
 // Fungsi untuk mendapatkan simbol yang merepresentasikan kepala ular berdasarkan arah gerakan
 // snake: parameter input passing, menunjuk ke objek ular yang akan diperiksa

@@ -54,17 +54,14 @@ bool snake_collides_with_self(Snake *snake)
   return false;
 }
 
-// Fungsi untuk menumbuhkan ular
-// snake: parameter input/output passing by reference, menunjuk ke objek ular yang akan diperbarui
-// Mengembalikan true jika ular berhasil tumbuh, false jika tidak (misalnya, jika sudah mencapai panjang maksimum)
-bool snake_grow(Snake *snake)
+// Prosedur untuk menumbuhkan ular
+// snake: parameter output passing by reference, menunjuk ke objek ular yang akan diperbarui
+void snake_grow(Snake *snake)
 {
   if (snake->length < MAX_SNAKE_LENGTH) // Cek apakah ular sudah mencapai panjang maksimum
   {
     snake->length = snake->length + 1; // Tambahkan satu segmen baru
-    return true;
   }
-  return false;
 }
 
 // Fungsi untuk mendapatkan simbol yang merepresentasikan kepala ular berdasarkan arah gerakan

@@ -226,7 +226,7 @@ void show_leaderboard(GameData *game_data)
 void show_copyright()
 {
   attron(COLOR_PAIR(4)); // beri warna biru
-  mvprintw(20, 10, "By Kelompok 9:");
+  mvprintw(20, 10, "By Kelompok Tirizz:");
   mvprintw(21, 10, "Ikhsan Satriadi");
   mvprintw(21, 35, "241511080");
   mvprintw(22, 10, "Rizky Satria Gunawan");

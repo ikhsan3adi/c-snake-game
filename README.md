@@ -6,6 +6,7 @@ Program ini adalah implementasi permainan klasik Snake yang dikembangkan sebagai
 
 | | |
 | --- | --- |
+| ![main_menu](./images/main_menu.png) | ![leaderboard](./images/leaderboard.png) |
 | ![level_menu](./images/level_menu.png) | ![in_game](./images/in_game.png) |
 | ![new_hi_score](./images/new_hi_score.png) | ![pause](./images/pause.png) |
 | ![game_over](./images/game_over.png) | ![win](./images/win.png) |

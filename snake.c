@@ -29,13 +29,15 @@ Snake create_snake(int start_x, int start_y)
 void snake_move(Snake *snake)
 {
   // Geser segmen dan update segmen berdasarkan panjang ular
-  for (int i = snake->length; i > 0; i--)
+  for (int i = snake->length - 1; i > 0; i--)
   {
     snake->segments[i] = snake->segments[i - 1]; // segmen saat ini diassign dengan nilai segmen sebelumnya
   }
 
-  // Perbarui kepala
+  // Assign posisi kepala ke segmen pertama
   snake->segments[0] = snake->head;
+
+  // Perbarui kepala
   snake->head = vector2_add(snake->head, snake->direction); // geser kepala ke arah yang ditentukan sesuai vektor direction
 }
 

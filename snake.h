@@ -10,7 +10,7 @@
 #include <stdbool.h>
 #include "vector.h"
 
-// Definisi maksimum panjang ular
+// Definisi maksimum panjang ular sekaligus maksimum skor
 #define MAX_SNAKE_LENGTH 256
 
 // Struktur untuk merepresentasikan objek ular dalam permainan

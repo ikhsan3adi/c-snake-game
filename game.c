@@ -99,9 +99,6 @@ int in_leaderboard(GameData *game_data, Score current_score)
 // game: parameter input/output passing by reference, tipe Game*, menunjuk ke objek permainan yang akan diperbarui
 void game_update(Game *game)
 {
-  // Gerakkan ular
-  snake_move(&game->game_snake);
-
   // Periksa tabrakan dengan diri sendiri atau batas layar
   if (is_game_over(game))
   {
@@ -109,28 +106,30 @@ void game_update(Game *game)
     return;
   }
 
-  //* Cek apakah skor sudah mencapai maksimal skor, jika iya maka game berhenti dan menang
-  if (game->current_score.score >= MAX_SNAKE_LENGTH)
-  {
-    game->is_running = false;
-    game->is_winning = true; // menang!
-    return;
-  }
-
   // Cek tabrakan dengan makanan
   if (vector2_equals(game->game_food.position, game->game_snake.head))
   {
-    // Tambah skor dan panjang ular
-    if (snake_grow(&game->game_snake))
-    {
-      add_score(&game->current_score);
-    }
+    // Tambah panjang ular
+    snake_grow(&game->game_snake);
+
+    // Tambah skor
+    add_score(&game->current_score);
 
     // Buat makanan baru
     game->game_food = create_food(
         game->screen_width,
         game->screen_height,
         &game->game_snake);
+  }
+
+  // Gerakkan ular
+  snake_move(&game->game_snake);
+
+  //* Cek apakah skor sudah mencapai maksimal skor, jika iya maka game berhenti dan menang
+  if (game->current_score.score >= MAX_SNAKE_LENGTH)
+  {
+    game->is_running = false;
+    game->is_winning = true; // menang!
   }
 }
 

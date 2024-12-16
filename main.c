@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
     }
 
     // Tampilkan tampilan game over/pause jika tidak sedang berjalan
-    if (game.is_pause || !game.is_running)
+    if (game.is_pause || !game.is_running || game.is_winning)
     {
       if (!game.is_pause)
       {

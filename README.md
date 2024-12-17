@@ -20,27 +20,38 @@ Program ini adalah implementasi permainan klasik Snake yang dikembangkan sebagai
 
 - ### Menu Utama
 
-  Menampilkan opsi untuk memulai permainan, mengatur level, atau keluar dari permainan.
+  Pemain dapat memilih opsi:
+  - Main: Memulai permainan.
+  - Atur Level: Mengatur tingkat kesulitan permainan.
+  - Leaderboard: Menampilkan daftar pemain dengan skor tertinggi.
+  - Exit/Keluar dari permainan.
 
 - ### Pengaturan Level
 
-  Memungkinkan pemain untuk memilih level permainan yang mempengaruhi kecepatan ular. Level tersedia dari 1 sampai 5.
+  Permainan menyediakan 5 level kesulitan yang memengaruhi kecepatan pergerakan ular. Semakin tinggi level, semakin cepat permainan berlangsung, sehingga menambah tantangan bagi pemain.
 
-- ### Hi-Score
+- ### Hi-Score dan Leaderboard
 
-  Menampilkan skor saat ini dan menyimpan skor tertinggi (hi-score) yang dicapai oleh pemain. Pemain diminta untuk memasukkan nama mereka setelah mencapai hi-score baru, yang akan disimpan bersama dengan skor tertinggi.
+  - Setelah permainan berakhir, jika pemain mencapai skor tertinggi baru atau masuk ke dalam jajaran sepuluh besar skor tertinggi, mereka akan diminta memasukkan nama. Nama dan skor tersebut akan disimpan secara permanen.
+  - Leaderboard menampilkan Top 10 skor tertinggi beserta nama pemain serta tanggal dalam urutan peringkat. Daftar ini diperbarui secara otomatis setiap kali pemain baru mencapai skor yang lebih tinggi dari skor yang ada.
 
 - ### Fitur Pause
 
-  Memungkinkan pemain untuk menjeda permainan dengan menekan tombol ESC, dengan tampilan yang menunjukkan pesan "Paused".
+  Pemain dapat menjeda permainan kapan saja dengan menekan tombol ESC. Layar akan menampilkan pesan "Paused" hingga pemain melanjutkan permainan dengan menekan tombol spasi/space.
 
-- ### Tampilan Grafis yang Smooth
+- ### Alur Permainan
 
-  Menggunakan library curses untuk menciptakan antarmuka teks interaktif dengan pengaturan warna, pembaruan layar yang efisien dan kontrol kursor memberikan pengalaman bermain yang lebih halus dan responsif serta merespons input pengguna secara real-time untuk memberikan kontrol yang lancar selama permainan.
+  - Pemain mengontrol ular menggunakan tombol panah untuk bergerak ke empat arah.
+  - Ular akan tumbuh jika memakan makanan yang muncul secara acak di layar.
+  - Skor pemain bertambah seiring dengan jumlah makanan yang dikonsumsi.
+  - Permainan akan berakhir jika ular menabrak dinding atau tubuhnya sendiri.
+  - Setelah permainan berakhir, pemain dapat melihat skor yang diperoleh dan membandingkannya dengan Hi-Score yang tersimpan.
+  
+- ### Penyimpanan Data Permainan
 
-- ### Penyimpanan dan Pemulihan Data
-
-  Menyimpan data permainan, termasuk hi-score dan pengaturan, dalam file biner agar lebih aman.
+  Program menyimpan data permainan dalam file biner, yang terdiri dari:
+  - Data pengaturan/settings permainan, seperti level dan kecepatan permainan.
+  - Leaderboard yang menyimpan Top 10 skor tertinggi beserta nama pemain untuk mencatat prestasi terbaik.
 
 ## Library yang Digunakan
 
@@ -57,47 +68,30 @@ Program ini adalah implementasi permainan klasik Snake yang dikembangkan sebagai
 
 - **curses.h**: Digunakan untuk membuat antarmuka pengguna berbasis teks yang lebih interaktif dan responsif.
 
-## Alur Permainan
-
-1. Pemain disambut dengan menu utama untuk memulai permainan, mengatur level, atau keluar.
-
-2. Pemain dapat memilih level yang mempengaruhi kecepatan ular.
-
-3. Ular muncul di tengah layar, dan makanan dihasilkan secara acak.
-
-4. Pemain mengendalikan ular menggunakan tombol panah untuk bergerak dan mengubah arah.
-
-5. Ular tumbuh dan skor bertambah setiap kali makanan dikumpulkan. Makanan baru muncul secara acak.
-
-6. Skor pemain ditampilkan, dan hi-score diperbarui jika pemain mencapai skor lebih tinggi.
-
-7. Permainan berakhir jika ular menabrak dinding atau tubuhnya sendiri, dengan tampilan "Game Over".
-
-8. Pemain dapat menjeda permainan dengan menekan tombol ESC.
-
-9. Pemain dapat keluar dari permainan melalui menu utama atau saat permainan berlangsung.
-
-10. Data permainan, termasuk hi-score, disimpan dan dapat dimuat kembali saat permainan dimulai.
-
 ## Struktur Program
 
 Program ini terdiri dari beberapa file sumber yang masing-masing memiliki tanggung jawab tertentu:
 
 - **main.c**: Titik masuk program yang mengatur siklus permainan.
-- **vector.c**: Mengelola operasi terkait dengan tipe data `Vector2`.
-- **snake.c**: Mengelola logika pergerakan dan pertumbuhan ular.
-- **food.c**: Mengelola logika pembuatan dan interaksi makanan.
-- **score.c**: Mengelola logika penghitungan dan penyimpanan skor.
-- **settings.c**: Mengelola pengaturan permainan, termasuk level dan kecepatan.
-- **gamedata.c**: Mengelola penyimpanan dan pemuatan data permainan.
-- **game.c**: Mengelola logika utama permainan dan interaksi antar objek
-- **ui.c**: Mengelola antarmuka pengguna, termasuk tampilan menu dan elemen permainan.
+- **vector**: Mengelola operasi terkait dengan tipe data `Vector2`.
+- **snake**: Mengelola logika pergerakan dan pertumbuhan ular.
+- **food**: Mengelola logika pembuatan dan interaksi makanan.
+- **score**: Mengelola logika penghitungan dan penyimpanan skor.
+- **settings**: Mengelola pengaturan permainan, termasuk level dan kecepatan.
+- **gamedata**: Mengelola penyimpanan dan pemuatan data permainan.
+- **game**: Mengelola logika utama permainan dan interaksi antar objek
+- **ui**: Mengelola antarmuka pengguna, termasuk tampilan menu dan elemen permainan.
+- **datetime**: Mengelola fungsi terkait waktu dan tanggal.
 
 ## Menjalankan Program
 
 ### Kompilasi Program
 
-- Install library `ncurses` untuk pengguna **Linux dan MacOS**.
+- Install library `ncurses` untuk pengguna **Linux dan MacOS**. Pada **Windows**, library `pdcurses` sudah tersedia di dalam folder `lib` dan `include`.
+
+- Cara install `ncurses`:
+  - [Linux](https://www.cyberciti.biz/faq/linux-install-ncurses-library-headers-on-debian-ubuntu-centos-fedora/)
+  - [MacOS](https://gist.github.com/cnruby/960344)
 
 - Install GNU `make`.
 

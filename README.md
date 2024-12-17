@@ -62,6 +62,7 @@ Program ini adalah implementasi permainan klasik Snake yang dikembangkan sebagai
 - **stdlib.h**: Digunakan untuk fungsi-fungsi umum seperti `rand` dan `srand`.
 - **stdbool.h**: Digunakan untuk mendukung tipe data boolean (`true` dan `false`).
 - **time.h**: Digunakan untuk fungsi terkait waktu, seperti `time()` dan `srand()` untuk mengatur seed acak.
+- **ctype.h**: Digunakan untuk fungsi yang memeriksa karakter, seperti `isprint`
 - **unistd.h**: Digunakan untuk fungsi-fungsi POSIX, seperti `usleep()` yang digunakan untuk menunda eksekusi program.
 
 ### Library Tambahan

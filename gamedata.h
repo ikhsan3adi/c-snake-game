@@ -31,8 +31,4 @@ void save_game_data(const char *filename, GameData *game_data);
 // Mengembalikan GameData dari file atau GameData dengan nilai default
 GameData load_game_data(const char *filename);
 
-//! Prosedur untuk menghapus data permainan (belum dipakai)
-// filename: parameter input passing by value, tipe const char*, nama file untuk dihapus
-void delete_game_data(const char *filename);
-
 #endif // GAMEDATA_H

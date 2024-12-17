@@ -55,11 +55,3 @@ GameData load_game_data(const char *filename)
   }
   return game_data;
 }
-
-// Prosedur untuk menghapus data permainan
-// filename: parameter input passing by value, tipe const char*, nama file untuk dihapus
-void delete_game_data(const char *filename)
-{
-  // Menghapus file dengan nama yang diberikan
-  remove(filename);
-}

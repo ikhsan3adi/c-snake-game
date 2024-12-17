@@ -96,6 +96,12 @@ Program ini terdiri dari beberapa file sumber yang masing-masing memiliki tanggu
 
 - Install GNU `make`.
 
+- Buat direktori `build:
+
+  ```sh
+  mkdir build
+  ```
+
 - Buka terminal dan arahkan ke direktori projek. Lalu gunakan perintah berikut untuk mengkompilasi program:
 
   ```sh

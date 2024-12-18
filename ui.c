@@ -382,7 +382,7 @@ void show_in_game_score(Game *game)
 {
   // Tampilkan skor
   sprintf(buffer, " Score: %d ", game->current_score.score);
-  mvaddstr(0, 2, buffer); // tampilkan skor di tengah atas
+  mvaddstr(0, 2, buffer); // tampilkan skor di kiri atas layar
 }
 
 // Prosedur untuk menampilkan hi-score saat ini
@@ -391,7 +391,7 @@ void show_in_game_hi_score(Game *game)
 {
   // Tampilkan hi-score
   sprintf(buffer, " Hi-Score: %d | %s ", game->hi_score.score, game->hi_score.player_name);
-  mvaddstr(0, game->screen_width * 2 - strlen(buffer), buffer); // tampilkan hi-score di kiri bawah
+  mvaddstr(0, game->screen_width * 2 - strlen(buffer), buffer); // tampilkan hi-score di kanan atas layar
 }
 
 // Prosedur untuk menampilkan level saat ini yang sedang dimainkan
@@ -400,7 +400,7 @@ void show_in_game_level(Game *game)
 {
   // Tampilkan level saat ini
   sprintf(buffer, " Level: %d ", game->settings.level);
-  mvaddstr(game->screen_height + 1, 2, buffer); // tampilkan level di kanan atas
+  mvaddstr(game->screen_height + 1, 2, buffer); // tampilkan level di kiri bawah layar
 }
 
 // Prosedur untuk menampilkan tampilan game over atau paused

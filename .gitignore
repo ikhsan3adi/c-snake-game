@@ -5,4 +5,4 @@
 **/*.out
 
 # for linux/macos
-snake
+build/snake

@@ -1,4 +1,4 @@
-# Tugas Besar Praktikum Dasar-Dasar Pemrograman
+# Snake
 
 ![preview](./images/preview.gif)
 

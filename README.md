@@ -1,4 +1,4 @@
-# Snake
+# Snake Game
 
 ![preview](./images/preview.gif)
 
@@ -96,7 +96,7 @@ Program ini terdiri dari beberapa file sumber yang masing-masing memiliki tanggu
 
 - Install GNU `make`.
 
-- Buat direktori `build:
+- Buat direktori `build`:
 
   ```sh
   mkdir build

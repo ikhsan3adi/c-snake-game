@@ -8,9 +8,6 @@
 #include <string.h>
 #include "gamedata.h"
 
-// Prosedur untuk menyimpan data permainan ke file biner
-// filename: parameter input passing by value, tipe const char*, nama file untuk menyimpan data
-// game_data: parameter input passing by reference, tipe GameData*, pointer ke objek GameData yang akan disimpan
 void save_game_data(const char *filename, GameData *game_data)
 {
   FILE *file = fopen(filename, "wb"); // Membuka file dalam mode write binary
@@ -21,9 +18,6 @@ void save_game_data(const char *filename, GameData *game_data)
   }
 }
 
-// Fungsi untuk memuat data permainan dari file biner
-// filename: parameter input passing by value, tipe const char*, nama file untuk dimuat datanya
-// Mengembalikan GameData dari file atau GameData dengan nilai default
 GameData load_game_data(const char *filename)
 {
   // kamus
@@ -56,8 +50,6 @@ GameData load_game_data(const char *filename)
   return game_data;
 }
 
-// Prosedur untuk menghapus data permainan
-// filename: parameter input passing by value, tipe const char*, nama file untuk dihapus
 void delete_game_data(const char *filename)
 {
   // Menghapus file dengan nama yang diberikan

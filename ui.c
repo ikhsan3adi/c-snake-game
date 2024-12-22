@@ -14,8 +14,6 @@
 // Kamus data
 char buffer[100]; // Buffer untuk menyimpan text sementara, variabel global
 
-// Prosedur untuk menginisialisasi antarmuka pengguna (UI)
-// Mengatur tampilan, warna, dan pengaturan awal untuk tampilan permainan.
 void initialize_ui()
 {
   // Atur seed acak
@@ -37,7 +35,6 @@ void initialize_ui()
   init_pair(4, COLOR_CYAN, COLOR_BLACK);   // warna biru muda, background hitam = 4
 }
 
-// Prosedur untuk menampilkan judul game dengan ascii art
 void show_title()
 {
   attron(COLOR_PAIR(2)); // beri warna hijau
@@ -50,8 +47,6 @@ void show_title()
   attroff(COLOR_PAIR(2)); // hapus warna hijau
 }
 
-// Prosedur untuk menampilkan menu utama permainan
-// game_data: parameter input/output passing by reference, menunjuk ke objek GameData yang menyimpan data permainan
 void show_menu(GameData *game_data)
 {
   do
@@ -97,8 +92,6 @@ void show_menu(GameData *game_data)
   } while (true);
 }
 
-// Prosedur untuk menampilkan pengaturan level permainan
-// game_data: parameter input/output passing by reference, menunjuk ke objek GameData yang menyimpan data permainan
 void show_game_level_menu(GameData *game_data)
 {
   do
@@ -154,15 +147,6 @@ void show_game_level_menu(GameData *game_data)
   } while (true);
 }
 
-/**
- * Menampilkan leaderboard yang berisi skor tertinggi.
- *
- * Prosedur ini menampilkan daftar skor tertinggi dari permainan
- * dan menunggu input dari pengguna untuk kembali ke menu.
- *
- * @param game_data Pointer ke objek GameData yang menyimpan informasi
- *                  tentang leaderboard dan skor pemain.
- */
 void show_leaderboard(GameData *game_data)
 {
   // Kamus data
@@ -221,8 +205,6 @@ void show_leaderboard(GameData *game_data)
   } while (true);
 }
 
-// Prosedur untuk menampilkan nama pembuat dan kelompok
-// Tampilkan kelompok, nama dan nim pembuat
 void show_copyright()
 {
   attron(COLOR_PAIR(4)); // beri warna biru
@@ -234,9 +216,6 @@ void show_copyright()
   attroff(COLOR_PAIR(4)); // hapus warna biru
 }
 
-// Prosedur untuk merender tampilan permainan
-// game: parameter input, menunjuk ke objek Game yang akan dirender
-// Menggambar elemen-elemen permainan seperti ular, makanan, skor, dan batas layar.
 void render_ui(Game *game)
 {
   erase(); // Bersihkan layar
@@ -260,8 +239,6 @@ void render_ui(Game *game)
   show_in_game_level(game);
 }
 
-// Prosedur untuk menampilkan panduan permainan sebelum dimulai
-// game: parameter input, menunjuk ke objek Game untuk mengambil informasi permainan
 void show_guides(Game *game)
 {
   erase(); // Bersihkan layar
@@ -300,12 +277,6 @@ void show_guides(Game *game)
   } while (true);
 }
 
-// Prosedur untuk menggambar batas layar
-// y: posisi y dari batas
-// x: posisi x dari batas
-// width: lebar batas
-// height: tinggi batas
-// Menggambar batas permainan di layar.
 void draw_border(int y, int x, int width, int height)
 {
   attron(COLOR_PAIR(3)); // Menggunakan warna kuning
@@ -343,8 +314,6 @@ void draw_border(int y, int x, int width, int height)
   attroff(COLOR_PAIR(3)); // Menonaktifkan warna kuning
 }
 
-// Prosedur untuk menampilkan makanan ular ke layar
-// game: parameter input, menunjuk ke objek Game untuk mengambil informasi permainan
 void draw_food(Game *game)
 {
   attron(COLOR_PAIR(1)); // Menggunakan warna makanan (merah)
@@ -355,8 +324,6 @@ void draw_food(Game *game)
   attroff(COLOR_PAIR(1)); // Menonaktifkan kembali warna makanan (merah)
 }
 
-// Prosedur untuk menampilkan ular ke layar
-// game: parameter input, menunjuk ke objek Game untuk mengambil informasi permainan
 void draw_snake(Game *game)
 {
   // Gambar badan/segmen ular
@@ -376,8 +343,6 @@ void draw_snake(Game *game)
   attroff(COLOR_PAIR(2)); // Menonaktifkan kembali warna ular (hijau)
 }
 
-// Prosedur untuk menampilkan score saat ini
-// game: parameter input, menunjuk ke objek Game untuk mengambil informasi permainan
 void show_in_game_score(Game *game)
 {
   // Tampilkan skor
@@ -385,8 +350,6 @@ void show_in_game_score(Game *game)
   mvaddstr(0, 2, buffer); // tampilkan skor di kiri atas layar
 }
 
-// Prosedur untuk menampilkan hi-score saat ini
-// game: parameter input, menunjuk ke objek Game untuk mengambil informasi permainan
 void show_in_game_hi_score(Game *game)
 {
   // Tampilkan hi-score
@@ -394,8 +357,6 @@ void show_in_game_hi_score(Game *game)
   mvaddstr(0, game->screen_width * 2 - strlen(buffer), buffer); // tampilkan hi-score di kanan atas layar
 }
 
-// Prosedur untuk menampilkan level saat ini yang sedang dimainkan
-// game: parameter input, menunjuk ke objek Game untuk mengambil informasi permainan
 void show_in_game_level(Game *game)
 {
   // Tampilkan level saat ini
@@ -403,10 +364,6 @@ void show_in_game_level(Game *game)
   mvaddstr(game->screen_height + 1, 2, buffer); // tampilkan level di kiri bawah layar
 }
 
-// Prosedur untuk menampilkan tampilan game over atau paused
-// game: parameter input, menunjuk ke objek Game yang akan ditampilkan
-// game_data: parameter input/output passing by reference, menunjuk ke objek GameData yang menyimpan data permainan
-// Menampilkan pesan game over atau kemenangan, serta instruksi untuk memulai ulang permainan.
 void show_game_over_ui(Game *game, GameData *game_data)
 {
   // Jika menang, tampilkan pesan kemenangan
@@ -479,9 +436,6 @@ void show_game_over_ui(Game *game, GameData *game_data)
   } while (true);
 }
 
-// Prosedur untuk menampilkan dan mengambil input nama player yang dapat hi-score baru
-// game: parameter input/output passing by reference, menunjuk ke objek Game yang akan diperbarui berdasarkan input
-// rank: parameter input, peringkat pemain yang baru, didapatkan dari rank_index + 1
 void get_hi_score_player_name(Game *game, int rank)
 {
   attron(COLOR_PAIR(4)); // Menggunakan warna biru
@@ -554,8 +508,6 @@ void get_hi_score_player_name(Game *game, int rank)
   render_ui(game);
 }
 
-// Prosedur untuk menangani input dari pengguna selama dalam permainan
-// game: parameter input/output passing by reference, menunjuk ke objek Game yang akan diperbarui berdasarkan input
 void ui_handle_input(Game *game)
 {
   switch (getch()) // Mendapatkan input
@@ -586,8 +538,6 @@ void ui_handle_input(Game *game)
   }
 }
 
-// Prosedur untuk keluar dari permainan
-// Menghentikan antarmuka pengguna dan membersihkan layar sebelum keluar dari program.
 void quit_game()
 {
   endwin(); // Mengakhiri mode curses, mengembalikan terminal ke mode normal

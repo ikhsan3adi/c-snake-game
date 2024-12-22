@@ -6,11 +6,6 @@
 
 #include "game.h"
 
-// Fungsi untuk membuat objek permainan baru
-// screen_width: parameter input passing by value, tipe int, lebar layar
-// screen_height: parameter input passing by value, tipe int, tinggi layar
-// game_data: parameter input passing by reference, tipe GameData, data permainan
-// Mengembalikan objek permainan baru bertipe Game
 Game game_create(int screen_width, int screen_height, GameData *game_data)
 {
   // Kamus data
@@ -39,10 +34,6 @@ Game game_create(int screen_width, int screen_height, GameData *game_data)
   return new_game;
 }
 
-// Prosedur untuk mengubah hi_score di game dan game_data
-// game: parameter output passing by reference, tipe Game*, menunjuk ke objek permainan yang akan diperbarui
-// game_data: parameter output passing by reference, tipe GameData*, menunjuk ke objek data permainan yang akan diperbarui
-// current_score: parameter input passing by value, tipe Score
 void set_game_hi_score(Game *game, GameData *game_data, Score current_score)
 { // Cek apakah skor saat ini melebihi hi-score
   if (current_score.score > game_data->hi_score.score)
@@ -52,11 +43,6 @@ void set_game_hi_score(Game *game, GameData *game_data, Score current_score)
   }
 }
 
-// Prosedur untuk memperbarui leaderboard
-// game: parameter output passing by reference, tipe Game*, menunjuk ke objek permainan yang akan diperbarui
-// game_data: parameter output passing by reference, tipe GameData*, menunjuk ke objek data permainan yang akan diperbarui
-// current_score: parameter input passing by value, tipe Score
-// rank_index: parameter input passing by value, tipe int, lokasi index di leaderboard untuk skor baru
 void update_leaderboard(Game *game, GameData *game_data, Score current_score, int rank_index)
 {
   // Cek apakah rank_index valid
@@ -76,10 +62,6 @@ void update_leaderboard(Game *game, GameData *game_data, Score current_score, in
   set_game_hi_score(game, game_data, game_data->leaderboard[0]);
 }
 
-// Fungsi untuk mengecek apakah skor dapat masuk ke leaderboard
-// game_data: parameter output passing by reference, tipe GameData*, menunjuk ke objek data permainan
-// current_score: parameter input passing by value, tipe Score, skor saat ini
-// Mengembalikan index peringkat jika masuk leaderboard , -1 jika tidak masuk leaderboard
 int in_leaderboard(GameData *game_data, Score current_score)
 {
   // Cek setiap skor di leaderboard
@@ -95,8 +77,6 @@ int in_leaderboard(GameData *game_data, Score current_score)
   return -1;
 }
 
-// Prosedur untuk memperbarui logika permainan
-// game: parameter input/output passing by reference, tipe Game*, menunjuk ke objek permainan yang akan diperbarui
 void game_update(Game *game)
 {
   // Periksa tabrakan dengan diri sendiri atau batas layar
@@ -133,9 +113,6 @@ void game_update(Game *game)
   }
 }
 
-// Fungsi untuk memeriksa apakah permainan telah berakhir (ular menabrak tembok atau ular itu sendiri)
-// game: parameter input passing by reference, tipe Game*, menunjuk ke objek permainan yang akan diperiksa
-// Mengembalikan true jika permainan berakhir, false jika tidak
 bool is_game_over(Game *game)
 {
   // Kamus
@@ -152,17 +129,11 @@ bool is_game_over(Game *game)
       game->screen_height);
 }
 
-// Prosedur untuk merestart permainan
-// game: parameter input/output passing by reference, tipe Game*, menunjuk ke objek permainan yang akan direset
-// game_data: parameter output passing by reference, tipe GameData*, menunjuk ke objek data permainan
 void game_restart(Game *game, GameData *game_data)
 {
   *game = game_create(game->screen_width, game->screen_height, game_data); // assign game dengan game baru
 }
 
-// Prosedur untuk menangani input dari pengguna untuk mengubah arah pergerakan ular
-// game: parameter input/output passing by reference, tipe Game*, menunjuk ke objek permainan yang akan diperbarui berdasarkan input
-// new_dir: parameter input passing by value, tipe Vector2, arah baru untuk ular
 void game_handle_input(Game *game, Vector2 new_dir)
 {
   snake_change_direction(&game->game_snake, new_dir);

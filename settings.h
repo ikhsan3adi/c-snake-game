@@ -22,10 +22,12 @@ typedef struct
   int speed; // Kecepatan permainan
 } Settings;
 
-// Prosedur untuk memperbarui pengaturan permainan (kecepatan permainan)
-// settings: parameter output passing by reference, tipe Settings, alamat dari objek yang akan diperbarui
-// level: parameter input passing by value, tipe integer, level permainan
-// new_speed: parameter input passing by value, tipe integer, kecepatan permainan baru
-void update_settings(Settings *settings, int level, int new_speed);
+/**
+ * Prosedur untuk memperbarui pengaturan permainan
+ * @param settings menunjuk ke objek Settings yang akan diperbarui
+ * @param level level permainan baru
+ * @param speed kecepatan permainan baru
+ */
+void update_settings(Settings *settings, int level, int speed);
 
 #endif // SETTINGS_H

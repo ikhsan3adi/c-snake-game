@@ -7,11 +7,6 @@
 #include <stdlib.h>
 #include "food.h"
 
-// Fungsi untuk membuat objek makanan baru
-// screen_width: parameter input passing by value, tipe int, lebar layar
-// screen_height: parameter input passing by value, tipe int, tinggi layar
-// snake: parameter input passing by reference, tipe Snake*, menunjuk ke objek ular untuk menghindari tabrakan
-// Mengembalikan objek makanan baru bertipe Food
 Food create_food(int screen_width, int screen_height, Snake *snake)
 {
   // Kamus
@@ -21,11 +16,6 @@ Food create_food(int screen_width, int screen_height, Snake *snake)
   return new_food;
 }
 
-// Fungsi untuk menghasilkan posisi makanan secara acak
-// screen_width: parameter input passing by value, tipe int, lebar layar
-// screen_height: parameter input passing by value, tipe int, tinggi layar
-// snake: parameter input passing by reference, tipe Snake*, menunjuk ke objek ular untuk menghindari tabrakan
-// Mengembalikan posisi makanan yang valid bertipe Vector2
 Vector2 food_generate_position(int screen_width, int screen_height, Snake *snake)
 {
   // Kamus

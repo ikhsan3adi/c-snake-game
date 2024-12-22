@@ -7,12 +7,6 @@
 #include <string.h>
 #include "score.h"
 
-// Fungsi untuk membuat objek score
-// score: parameter input passing by value, tipe integer
-// player_name: parameter input passing by value, tipe string, nama pemain
-// level: parameter input passing by value, tipe integer, tingkat permainan
-// date: parameter input passing by value, tipe DateTime, tanggal skor dicapai
-// Mengembalikan objek Score
 Score create_score(int score, char *player_name, int level, DateTime date)
 {
   // Kamus
@@ -27,8 +21,6 @@ Score create_score(int score, char *player_name, int level, DateTime date)
   return new_score;
 }
 
-// Prosedur untuk menambah score
-// score: parameter output passing by reference, tipe Score*, pointer ke objek Score yang akan ditambah
 void add_score(Score *score)
 {
   score->score++; // increment skor

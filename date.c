@@ -13,9 +13,6 @@ static char *month_names[12] = {"Jan", "Feb", "Mar", "Apr",
                                 "Mei", "Jun", "Jul", "Aug",
                                 "Sep", "Okt", "Nov", "Des"};
 
-// Fungsi untuk membuat tanggal dan waktu
-// Parameter : year, month, day, hour, minutes, second, bertipe integer
-// Mengembalikan objek bertipe DateTime
 DateTime create_date(int year, int month, int day, int hour, int minute, int second)
 {
   // Kamus data
@@ -34,11 +31,6 @@ DateTime create_date(int year, int month, int day, int hour, int minute, int sec
     return create_date(1900, 1, 1, 0, 0, 0); // kembalikan tanggal 1 Januari 1900
 }
 
-// Memeriksa apakah suatu tanggal valid, yaitu dengan
-// memperhatikan rentang tahun dan bulan serta
-// memperhatikan batas akhir per bulan
-// Parameter : date bertipe DateTime
-// Mengembalikan nilai boolean
 bool is_valid(DateTime date)
 {
   if ((date.year < 1900) || (date.year > 30000) || (date.month < 1) ||
@@ -48,9 +40,6 @@ bool is_valid(DateTime date)
     return true;
 }
 
-// Memberikan tanggal terakhir dari sebuah bulan
-// Parameter : date, bertipe DateTime
-// Mengembalikan integer, yaitu tanggal terakhir dari bulan
 int last_day_of_month(DateTime date)
 {
   if ((date.month == 1) || (date.month == 3) || (date.month == 5) ||
@@ -64,11 +53,6 @@ int last_day_of_month(DateTime date)
     return is_leap(date) ? 29 : 28; // cek apakah tahun kabisat
 }
 
-// Memeriksa apakah suatu tanggal adalah kabisat; Dipakai untuk bulan februari saja
-// kabisat adalah tahun yang habis dibagi 4 kecuali jika tahun habis dibagi 100
-// jika tahun habis dibagi 400 maka tahun tersebut adalah kabisat
-// Parameter : date, bertipe DateTime
-// Mengembalikan boolean
 bool is_leap(DateTime date)
 {
   if ((date.year % 4 == 0 && date.year % 100 != 0) || (date.year % 400 == 0))
@@ -77,8 +61,6 @@ bool is_leap(DateTime date)
     return false; // Bukan tahun kabisat
 }
 
-// Fungsi untuk mendapatkan tanggal dan waktu saat ini
-// Mengembalikan objek bertipe DateTime
 DateTime get_current_date()
 {
   // Kamus data
@@ -105,19 +87,12 @@ DateTime get_current_date()
   return date;
 }
 
-// Fungsi untuk mendapatkan nama bulan singkat (Jan, Feb, Mar, ..., Des)
-// Parameter : date, bertipe DateTime
-// Mengembalikan array char
 char *get_short_month_name(DateTime date)
 {
   // Kembalikan nama bulan sesuai dengan index date.month - 1
   return month_names[date.month - 1];
 }
 
-// Prosedur untuk mendapatkan string tanggal dan waktu dengan
-// "DD MMM YYYY HH:MM:SS" cth. "16 Nov 2024 15:00:00"
-// date_str: parameter output passing by reference bertipe char* (array karakter)
-// date: parameter input bertipe DateTime
 void date_to_string(char *date_str, DateTime date)
 {
   sprintf(date_str,

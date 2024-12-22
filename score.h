@@ -19,16 +19,20 @@ typedef struct
   DateTime date;        // Tanggal skor dicapai
 } Score;
 
-// Fungsi untuk membuat objek score
-// score: parameter input passing by value, tipe integer
-// player_name: parameter input passing by value, tipe string, nama pemain
-// level: parameter input passing by value, tipe integer, tingkat permainan
-// date: parameter input passing by value, tipe DateTime, tanggal skor dicapai
-// Mengembalikan objek Score
+/**
+ * Fungsi untuk membuat objek score
+ * @param score parameter input passing by value, tipe integer
+ * @param player_name parameter input passing by value, tipe string, nama pemain
+ * @param level parameter input passing by value, tipe integer, tingkat permainan
+ * @param date parameter input passing by value, tipe DateTime, tanggal skor dicapai
+ * @return Mengembalikan objek Score
+ */
 Score create_score(int score, char *player_name, int level, DateTime date);
 
-// Prosedur untuk menambah score
-// score: parameter output passing by reference, tipe Score*, pointer ke objek Score yang akan ditambah
+/**
+ * Prosedur untuk menambahkan skor
+ * @param score menunjuk ke objek Score yang akan ditambahkan skornya
+ */
 void add_score(Score *score);
 
 #endif // SCORE_H

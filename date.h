@@ -19,6 +19,9 @@ typedef struct
   int second;
 } DateTime;
 
+/// Array string untuk menyimpan nama bulan singkat
+extern char *month_names[12];
+
 /**
  * Fungsi untuk membuat tanggal dan waktu
  * @param year tahun

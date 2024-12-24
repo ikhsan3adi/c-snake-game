@@ -7,11 +7,9 @@
 #include <time.h>
 #include <stdio.h>
 
-// Variabel/konstanta global
-// Array untuk menyimpan nama bulan singkat
-static char *month_names[12] = {"Jan", "Feb", "Mar", "Apr",
-                                "Mei", "Jun", "Jul", "Aug",
-                                "Sep", "Okt", "Nov", "Des"};
+char *month_names[12] = {"Jan", "Feb", "Mar", "Apr",
+                         "Mei", "Jun", "Jul", "Aug",
+                         "Sep", "Okt", "Nov", "Des"};
 
 DateTime create_date(int year, int month, int day, int hour, int minute, int second)
 {

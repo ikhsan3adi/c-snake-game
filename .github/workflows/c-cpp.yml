@@ -22,7 +22,6 @@ jobs:
         sudo apt-get install libncurses5-dev libncursesw5-dev
     - name: make
       run: |
-        mkdir build
         make TARGET=build/${{env.target}}
     - name: Download a Build Artifact
       uses: actions/upload-artifact@v4
